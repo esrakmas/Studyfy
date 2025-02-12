@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color> <!-- Siyah -->
+    <color name="white">#FFFFFFFF</color> <!-- Beyaz -->
+    <color name="LightBlue">#F5F9FE</color> <!-- Soluk Mavi / Açık Mavi -->
+    <color name="LightBlue2">#C9E0F6</color> <!-- Açık Mavi / Pastel Mavi -->
+    <color name="DarkBlue">#000B69</color> <!-- Koyu Mavi -->
+    <color name="Green">#48D781</color> <!-- Yeşil -->
+    <color name="Blue1">#3F52F3</color> <!-- Mavi -->
+    <color name="Blue2">#6E73A5</color> <!-- Gri Mavi -->
+    <color name="Blue3">#CAE1FE</color> <!-- Soluk Mavi -->
+    <color name="selected_color">#FF6200EE</color>  <!-- Seçili öğe rengi -->
+    <color name="unselected_color">#FF888888</color>  <!-- Seçili olmayan öğe rengi -->
+
 </resources>
