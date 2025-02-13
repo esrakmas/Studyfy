@@ -1,4 +1,3 @@
 package com.example.studyfy.modules.home.data
 
-class AnasayfaVM {
-}
+data class HomeModel(var kullaniciadi:String?)

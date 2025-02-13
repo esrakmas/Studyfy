@@ -12,8 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Studyfy"
         tools:targetApi="31">
-
-
+        <activity
+            android:name=".modules.settings.ui.NotificationsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".modules.settings.ui.ChangePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".modules.settings.ui.EditProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".modules.settings.ui.SettingsActivity"
+            android:exported="false" />
         <activity
             android:name=".modules.bottomBar.ui.BottomBarActivity"
             android:exported="true">
