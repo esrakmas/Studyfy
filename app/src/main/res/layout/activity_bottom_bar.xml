@@ -34,8 +34,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:labelVisibilityMode="labeled"
-            app:itemIconTint="@color/bottom_nav_color_selector"
-            app:itemTextColor="@color/bottom_nav_color_selector"
+
             app:selectedItemId="@{viewModel.bottomBarModel.currentTab}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Studyfy</string>
+    <string name="sort">Sırala</string>
+    <string name="filter">Filtrele</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
