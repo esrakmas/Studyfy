@@ -12,12 +12,13 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:background="@color/Green"
         android:padding="16dp">
 
         <!-- Logo -->
         <ImageView
             android:id="@+id/logoImage"
-            android:layout_width="50dp"
+            android:layout_width="46dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:src="@drawable/ic_launcher_background" />
@@ -30,20 +31,23 @@
             android:gravity="end"
             android:orientation="horizontal">
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/filterButton"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                app:tint="@color/white"
                 android:contentDescription="@string/filter"
-                android:src="@drawable/ic_launcher_background" />
+                android:src="@drawable/ic_filter" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/sortButton"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                app:tint="@color/white"
                 android:layout_marginStart="8dp"
                 android:contentDescription="@string/sort"
-                android:src="@drawable/ic_launcher_background" />
+
+                android:src="@drawable/ic_sort" />
         </LinearLayout>
 
     </LinearLayout>
@@ -64,10 +68,10 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewHome"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="120dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_post" />
 
 </FrameLayout>

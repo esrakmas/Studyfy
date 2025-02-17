@@ -154,7 +154,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Takip Et"
-            android:backgroundTint="#009688"
+            android:backgroundTint="@color/DarkBlue"
             android:textColor="#FFFFFF"/>
     </LinearLayout>
 

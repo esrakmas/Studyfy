@@ -5,9 +5,13 @@
     android:layout_height="match_parent"
     android:background="@drawable/img_background"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="20dp">
 
     <!-- Arama Çubuğu -->
+
+    <!-- Kategori Seçimi -->
+
+    <!-- Grid İçerik Alanı -->
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
@@ -17,9 +21,6 @@
         android:iconifiedByDefault="false"
         android:queryHint="Dersin Adı" />
 
-    <!-- Kategori Seçimi -->
-
-    <!-- Grid İçerik Alanı -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewExplorer"
         android:layout_width="match_parent"

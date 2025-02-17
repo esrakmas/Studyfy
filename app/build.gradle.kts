@@ -55,7 +55,9 @@ dependencies {
     implementation(libs.androidx.databinding.runtime)
     implementation(libs.firebase.database)
     implementation(libs.firebase.firestore)
-    implementation(libs.firebase.storage) // Eğer DataBinding de kullanacaksan bu kalabilir.
+    implementation(libs.firebase.storage)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx) // Eğer DataBinding de kullanacaksan bu kalabilir.
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

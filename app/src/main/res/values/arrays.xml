@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Sınıf seviyeleri -->
+    <string-array name="class_levels">
+        <item>5. Sınıf</item>
+        <item>6. Sınıf</item>
+        <item>7. Sınıf</item>
+        <item>8. Sınıf</item>
+        <item>9. Sınıf</item>
+        <item>10. Sınıf</item>
+        <item>11. Sınıf</item>
+        <item>12. Sınıf</item>
+    </string-array>
+
+    <!-- Dersler -->
+    <string-array name="subjects">
+        <item>Matematik</item>
+        <item>Fizik</item>
+        <item>Kimya</item>
+        <item>Biyoloji</item>
+        <item>Tarih</item>
+        <item>Coğrafya</item>
+        <item>Türkçe</item>
+        <item>İngilizce</item>
+    </string-array>
+
+</resources>
