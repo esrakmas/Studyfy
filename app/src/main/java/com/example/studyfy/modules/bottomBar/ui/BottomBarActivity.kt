@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import com.example.studyfy.R
 import com.example.studyfy.appcomponents.base.BaseActivity
 import com.example.studyfy.databinding.ActivityBottomBarBinding
-import com.example.studyfy.modules.add.AddFragment
+import com.example.studyfy.modules.add.ui.AddFragment
 import com.example.studyfy.modules.bottomBar.data.BottomBarVM
 import com.example.studyfy.modules.explore.ui.ExploreFragment
 import com.example.studyfy.modules.home.ui.HomeFragment

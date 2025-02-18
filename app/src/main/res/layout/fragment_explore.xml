@@ -3,31 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/img_background"
-    android:orientation="vertical"
-    android:padding="20dp">
+    android:background="@drawable/ic_launcher_background"
+    android:orientation="vertical">
 
     <!-- Arama Çubuğu -->
-
-    <!-- Kategori Seçimi -->
-
-    <!-- Grid İçerik Alanı -->
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/search_background"
-        android:iconifiedByDefault="false"
-        android:queryHint="Dersin Adı" />
+        android:background="@drawable/spinner_background"
+        android:iconifiedByDefault="true"
+        android:queryHint="Dersin Adı"
+        android:textColor="@color/selected_color"
+        android:textColorHint="@color/DarkBlue"
+        android:theme="@style/SearchViewStyle" />
 
+    <!-- RecyclerView (İçerik Alanı) -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewExplorer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="8dp"
-        android:numColumns="2"
         android:scrollbars="vertical"
         app:spanCount="2" />
-
 </LinearLayout>
