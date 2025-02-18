@@ -150,35 +150,35 @@
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_margin="4dp"
-            android:background="@drawable/option_button"
+            android:background="@drawable/button_background_green"
             android:text="A"/>
 
         <Button
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_margin="4dp"
-            android:background="@drawable/option_button"
+            android:background="@drawable/button_background_green"
             android:text="B"/>
 
         <Button
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_margin="4dp"
-            android:background="@drawable/option_button"
+            android:background="@drawable/button_background_green"
             android:text="C"/>
 
         <Button
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_margin="4dp"
-            android:background="@drawable/option_button"
+            android:background="@drawable/button_background_green"
             android:text="D"/>
 
         <Button
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_margin="4dp"
-            android:background="@drawable/option_button"
+            android:background="@drawable/button_background_green"
             android:text="E"/>
     </LinearLayout>
 
@@ -198,7 +198,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_margin="4dp"
-            android:background="@drawable/button_background_dark"
+            android:background="@drawable/button_background_darkblue"
             android:padding="8dp"
             android:src="@drawable/ic_edit"
             app:tint="@color/white"/>
@@ -208,7 +208,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_margin="4dp"
-            android:background="@drawable/button_background_dark"
+            android:background="@drawable/button_background_darkblue"
             android:padding="8dp"
             android:src="@drawable/ic_lightbulb"
             app:tint="@color/white"/>
@@ -223,6 +223,6 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/button_background_dark"
+        android:background="@drawable/button_background_darkblue"
         android:layout_margin="16dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -397,7 +397,7 @@
             android:indeterminate="false"
             android:max="100"
             android:padding="4dp"
-            android:background="@drawable/search_background"
+            android:background="@drawable/input_background_black"
             android:progress="50"
            />
 

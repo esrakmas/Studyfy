@@ -97,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="4dp"
                     android:layout_weight="1"
-                    android:background="@drawable/option_button"
+                    android:background="@drawable/button_background_green"
                     android:text="A"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
@@ -108,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="4dp"
                     android:layout_weight="1"
-                    android:background="@drawable/option_button"
+                    android:background="@drawable/button_background_green"
                     android:text="B"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
@@ -119,7 +119,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="4dp"
                     android:layout_weight="1"
-                    android:background="@drawable/option_button"
+                    android:background="@drawable/button_background_green"
                     android:text="C"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
@@ -130,7 +130,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="4dp"
                     android:layout_weight="1"
-                    android:background="@drawable/option_button"
+                    android:background="@drawable/button_background_green"
                     android:text="D"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
@@ -141,7 +141,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="4dp"
                     android:layout_weight="1"
-                    android:background="@drawable/option_button"
+                    android:background="@drawable/button_background_green"
                     android:text="E"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
@@ -164,7 +164,7 @@
                 android:layout_height="38dp"
                 android:layout_marginTop="8dp"
                 android:entries="@array/class_levels"
-                android:background="@drawable/spinner_background" />
+                android:background="@drawable/input_background_black" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -180,7 +180,7 @@
                 android:layout_height="38dp"
                 android:layout_marginTop="8dp"
                 android:entries="@array/subjects"
-                android:background="@drawable/spinner_background" />
+                android:background="@drawable/input_background_black" />
 
             <!-- Açıklama -->
             <LinearLayout
@@ -228,7 +228,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/rounded_border"
+                android:background="@drawable/input_background_black"
                 android:hint="Açıklama ekleyebilirsiniz."
                 android:padding="12dp" />
 
