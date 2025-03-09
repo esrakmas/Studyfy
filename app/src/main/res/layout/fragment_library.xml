@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <!-- Üst Kısım (Dark Blue Arka Plan) -->
     <LinearLayout
@@ -17,12 +17,13 @@
         app:layout_constraintHeight_percent="0.25">
 
         <TextView
+            android:id="@+id/tv_library_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Kütüphane"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white" />
     </LinearLayout>
 
     <!-- İçerik Bölümü (Beyaz Arka Plan) -->
@@ -44,6 +45,7 @@
 
             <!-- Kaydedilenler -->
             <LinearLayout
+                android:id="@+id/savedPostsLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -54,18 +56,19 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_bookmark"
-                    android:layout_marginEnd="12dp"/>
+                    android:layout_marginEnd="12dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Kaydedilenler"
                     android:textSize="16sp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black" />
             </LinearLayout>
 
             <!-- Notlar -->
             <LinearLayout
+                android:id="@+id/notesLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -76,18 +79,19 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_desciraption"
-                    android:layout_marginEnd="12dp"/>
+                    android:layout_marginEnd="12dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Notlar"
                     android:textSize="16sp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black" />
             </LinearLayout>
 
             <!-- Sorular -->
             <LinearLayout
+                android:id="@+id/questionsLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -98,18 +102,19 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_quiz"
-                    android:layout_marginEnd="12dp"/>
+                    android:layout_marginEnd="12dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Sorular"
                     android:textSize="16sp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black" />
             </LinearLayout>
 
             <!-- Deneme -->
             <LinearLayout
+                android:id="@+id/testsLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -120,18 +125,19 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_edit_page"
-                    android:layout_marginEnd="12dp"/>
+                    android:layout_marginEnd="12dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Deneme"
+                    android:text="Quiz"
                     android:textSize="16sp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black" />
             </LinearLayout>
 
             <!-- Raporlar -->
             <LinearLayout
+                android:id="@+id/reportsLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -142,16 +148,17 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_poll"
-                    android:layout_marginEnd="12dp"/>
+                    android:layout_marginEnd="12dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Raporlar"
                     android:textSize="16sp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black" />
             </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,20 +9,17 @@
     <!-- Başlık -->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Notlarım2"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:layout_height="114dp"
         android:background="@color/DarkBlue"
+        android:padding="8dp"
+        android:text="üstte ders adı altta test1 test2 vs"
         android:textColor="@color/white"
-        android:padding="8dp"/>
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
-    <!-- GridView -->
-    <GridView
-        android:id="@+id/grid_saved"
+    <!-- Ders Listesi -->
+    <ListView
+        android:id="@+id/quiz_list11"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:numColumns="2"
-        android:verticalSpacing="8dp"
-        android:horizontalSpacing="8dp"/>
+        android:layout_height="match_parent"/>
 </LinearLayout>

@@ -1,4 +1,4 @@
-package com.example.studyfy.modules.report
+package com.example.studyfy.modules.notes_lessons
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,17 +9,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.studyfy.R
-import com.example.studyfy.modules.quiz.ui.QuizActivity
+import com.example.studyfy.modules.notes.ui.NotesActivity
+import com.example.studyfy.modules.questions.ui.QuestionsActivity
 
-class ReportListActivity : AppCompatActivity() {
+class NotesLessonsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_report_list)
-        val listView: ListView = findViewById(R.id.report_list)
+        setContentView(R.layout.activity_notes_lessons)
+
+
+        // ListView'yi bağla
+        val listView: ListView = findViewById(R.id.list_notes)
 
         // Örnek veri (gerçek veriye göre güncellenebilir)
-        val lessons = arrayOf("02.09.2025", "list 2 ", "list3")
+        val lessons = arrayOf("Lesson 1", "Lesson 2", "Lesson 3")
 
         // ListView için adapter ayarla
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, lessons)
@@ -27,8 +31,11 @@ class ReportListActivity : AppCompatActivity() {
 
         // Tıklama olayını ekle
         listView.setOnItemClickListener { parent, view, position, id ->
-            val intent = Intent(this, ReportActivity::class.java)
+            // Burada QuestionsActivity'yi başlatıyoruz
+            val intent = Intent(this, NotesActivity::class.java)
             startActivity(intent)
         }
+
+
     }
 }

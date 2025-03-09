@@ -1,4 +1,4 @@
-package com.example.studyfy.modules.report
+package com.example.studyfy.modules.quiz_list
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,15 +11,16 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.studyfy.R
 import com.example.studyfy.modules.quiz.ui.QuizActivity
 
-class ReportListActivity : AppCompatActivity() {
+class QuizListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_report_list)
-        val listView: ListView = findViewById(R.id.report_list)
+        setContentView(R.layout.activity_quiz_list)
+        // ListView'yi bağla
+        val listView: ListView = findViewById(R.id.quiz_list11)
 
         // Örnek veri (gerçek veriye göre güncellenebilir)
-        val lessons = arrayOf("02.09.2025", "list 2 ", "list3")
+        val lessons = arrayOf("test 1", "test 2", "test 3")
 
         // ListView için adapter ayarla
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, lessons)
@@ -27,7 +28,7 @@ class ReportListActivity : AppCompatActivity() {
 
         // Tıklama olayını ekle
         listView.setOnItemClickListener { parent, view, position, id ->
-            val intent = Intent(this, ReportActivity::class.java)
+            val intent = Intent(this, QuizActivity::class.java)
             startActivity(intent)
         }
     }

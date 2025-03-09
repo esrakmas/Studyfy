@@ -1,4 +1,4 @@
-package com.example.studyfy.modules.notes.ui
+package com.example.studyfy.modules.questions.ui
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -7,11 +7,11 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.studyfy.R
 
-class NotesActivity : AppCompatActivity() {
+class QuestionsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_notes)
+        setContentView(R.layout.activity_questions)
 
     }
 }
