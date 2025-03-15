@@ -13,31 +13,31 @@
         android:theme="@style/Theme.Studyfy"
         tools:targetApi="31">
         <activity
-            android:name=".modules.quiz_list.QuizListActivity"
+            android:name=".modules.library.quiz.quiz_list.QuizListActivity"
             android:exported="false" />
         <activity
-            android:name=".modules.quiz_lessons.QuizLessonsActivity"
+            android:name=".modules.library.quiz.quiz_lessons.QuizLessonsActivity"
             android:exported="false" />
         <activity
-            android:name=".modules.notes_lessons.NotesLessonsActivity"
+            android:name=".modules.library.notes.notes_lessons.NotesLessonsActivity"
             android:exported="false" />
         <activity
-            android:name=".modules.questions_lessons.QuestionsLessonsActivity"
+            android:name=".modules.library.questions.questions_lessons.QuestionsLessonsActivity"
             android:exported="false" />
         <activity
-            android:name=".modules.questions.ui.QuestionsActivity"
+            android:name=".modules.library.questions.QuestionsActivity"
             android:exported="false" />
         <activity
-            android:name=".modules.login.LoginActivity"
+            android:name=".modules.authentication.login.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".modules.report.ReportActivity"
+            android:name=".modules.library.report.ReportActivity"
             android:exported="false" />
         <activity
-            android:name=".modules.report.ReportListActivity"
+            android:name=".modules.library.report.ReportListActivity"
             android:exported="false" />
         <activity
-            android:name=".modules.quiz.ui.QuizActivity"
+            android:name=".modules.library.quiz.QuizActivity"
             android:exported="false" />
         <activity
             android:name=".modules.library.ui.QuizActivity"
@@ -47,10 +47,10 @@
             android:name=".modules.library.ui.TestsActivity"
             android:exported="false" />
         <activity
-            android:name=".modules.notes.ui.NotesActivity"
+            android:name=".modules.library.notes.NotesActivity"
             android:exported="false" />
         <activity
-            android:name=".modules.saved.ui.SavedActivity"
+            android:name=".modules.library.saved.SavedActivity"
             android:exported="false" />
         <activity
             android:name=".modules.settings.ui.NotificationsActivity"

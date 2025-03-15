@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.studyfy.modules.bottomBar.data.BottomBarVM" />
+            type="com.example.studyfy.modules.bottomBar.BottomBarVM" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

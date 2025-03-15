@@ -4,10 +4,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.studyfy.R
 import com.example.studyfy.modules.add.ui.AddFragment
-import com.example.studyfy.modules.explore.ui.ExploreFragment
-import com.example.studyfy.modules.home.ui.HomeFragment
-import com.example.studyfy.modules.library.ui.LibraryFragment
-import com.example.studyfy.modules.profile.ui.ProfileFragment
+import com.example.studyfy.modules.explore.ExploreFragment
+import com.example.studyfy.modules.home.HomeFragment
+import com.example.studyfy.modules.library.LibraryFragment
+import com.example.studyfy.modules.profile.ProfileFragment
 
 class BottomBarController(private val fragmentManager: FragmentManager) {
 

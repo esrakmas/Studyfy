@@ -5,7 +5,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.studyfy.R
 import com.example.studyfy.databinding.ActivityBottomBarBinding
-import com.example.studyfy.modules.bottomBar.data.BottomBarVM
 
 class BottomBarActivity : AppCompatActivity() {
 
