@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
+
+
+
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -39,21 +45,12 @@
         <activity
             android:name=".modules.library.quiz.QuizActivity"
             android:exported="false" />
-        <activity
-            android:name=".modules.library.ui.QuizActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Studyfy" />
-        <activity
-            android:name=".modules.library.ui.TestsActivity"
-            android:exported="false" />
+
         <activity
             android:name=".modules.library.notes.NotesActivity"
             android:exported="false" />
         <activity
             android:name=".modules.library.saved.SavedActivity"
-            android:exported="false" />
-        <activity
-            android:name=".modules.settings.ui.NotificationsActivity"
             android:exported="false" />
         <activity
             android:name=".modules.settings.ui.ChangePasswordActivity"
