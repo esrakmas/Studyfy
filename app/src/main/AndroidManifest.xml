@@ -65,7 +65,7 @@
             android:name=".modules.settings.ui.SettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".modules.bottomBar.ui.BottomBarActivity"
+            android:name=".modules.bottomBar.BottomBarActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -4,19 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-/*
-* _currentTab: Alt menüdeki mevcut sekmeyi tutar. Bu, kullanıcı hangi
-*  sekmeye tıklarsa onun değerini günceller.
-setCurrentTab(): Tab geçişlerini yönetmek için kullanılır.
-*
-* */
-
 class BottomBarVM : ViewModel() {
 
-    private val _bottomBarModel = MutableLiveData(BottomBarModel())
-    val bottomBarModel: LiveData<BottomBarModel> get() = _bottomBarModel
+    // Varsayılan sekme (Home)
+    private val _currentTab = MutableLiveData(0)
+    val currentTab: LiveData<Int> get() = _currentTab
 
     fun setCurrentTab(tab: Int) {
-        _bottomBarModel.value = _bottomBarModel.value?.copy(currentTab = tab)
+        _currentTab.value = tab
+    }
+
+    fun getCurrentTab(): Int {
+        return _currentTab.value ?: 0
     }
 }

@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".modules.bottomBar.ui.BottomBarActivity">
+        tools:context=".modules.bottomBar.BottomBarActivity">
 
         <!-- Fragment Container -->
         <FrameLayout
@@ -33,9 +33,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:labelVisibilityMode="labeled"
-
-            app:selectedItemId="@{viewModel.bottomBarModel.currentTab}" />
+            app:labelVisibilityMode="labeled" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
