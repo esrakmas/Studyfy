@@ -4,22 +4,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="0dp">
 
     <!-- Başlık -->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="114dp"
+        android:layout_height="140dp"
         android:background="@color/DarkBlue"
-        android:padding="8dp"
-        android:text="Quziler derslerin adları "
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:text="Quizler - Derslerin Adları"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="bottom|start"
+        android:paddingStart="16dp"
+        android:paddingBottom="20dp" />
 
     <!-- Ders Listesi -->
     <ListView
         android:id="@+id/list_quiz_lessons2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:dividerHeight="8dp"
+        android:padding="8dp"/>
 </LinearLayout>

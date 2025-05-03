@@ -8,12 +8,12 @@
     android:padding="24dp"
     android:background="@drawable/img_background">
 
+
     <ImageView
         android:id="@+id/imageView7"
         android:layout_width="match_parent"
         android:layout_height="46dp"
-        app:srcCompat="@drawable/ic_launcher_background" />
-
+        app:srcCompat="@drawable/img" />
 
     <TextView
         android:id="@+id/tvWelcome"
