@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.example.studyfy.R
 
 
-class AddFragment : Fragment() {
+class AddQuestionFragment : Fragment() {
 
 
     override fun onCreateView(
@@ -16,7 +16,7 @@ class AddFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add, container, false)
+        return inflater.inflate(R.layout.fragment_add_question, container, false)
     }
 
 
