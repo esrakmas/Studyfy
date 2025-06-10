@@ -1,5 +1,3 @@
-package com.example.studyfy.modules.db
-
 data class User(
     val userId: String = "",
     val username: String = "",
@@ -7,5 +5,6 @@ data class User(
     val biography: String = "",
     val gradeLevel: String = "",
     val followers: List<String> = emptyList(),
-    val following: List<String> = emptyList()
+    val following: List<String> = emptyList(),
+
 )

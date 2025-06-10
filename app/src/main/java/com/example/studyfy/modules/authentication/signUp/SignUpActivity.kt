@@ -74,8 +74,10 @@ class SignUpActivity : AppCompatActivity() {
                         "biography" to "",
                         "gradeLevel" to "11",
                         "followers" to listOf<String>(),
-                        "following" to listOf<String>()
+                        "following" to listOf<String>(),
+
                     )
+
 
                     // Firestore'a kullanıcı verisini ekle
                     db.collection("users").document(userId).set(user)

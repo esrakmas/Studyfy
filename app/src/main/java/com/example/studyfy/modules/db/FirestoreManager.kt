@@ -1,6 +1,7 @@
 package com.example.studyfy.modules.db
 
 
+import User
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.*

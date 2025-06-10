@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.google.gms.google.services)
     kotlin("plugin.serialization") version "1.9.22"
+
+
 }
 
 android {
@@ -63,15 +65,20 @@ dependencies {
     implementation(libs.firebase.storage)
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.database)
+    implementation(libs.play.services.cast.tv)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    implementation ("com.cloudinary:cloudinary-android:2.3.1")
+
+    implementation("androidx.activity:activity-ktx:1.8.0")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 
 
 
 
-    implementation("io.ktor:ktor-client-android:3.1.1")
+    implementation(libs.ktor.client.android)
 
 
 
