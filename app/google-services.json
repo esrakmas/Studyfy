@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "371502097175",
-    "project_id": "todoapp-ffd45",
-    "storage_bucket": "todoapp-ffd45.firebasestorage.app"
+    "project_number": "197895555845",
+    "project_id": "studyfy-882e5",
+    "storage_bucket": "studyfy-882e5.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:371502097175:android:61fc5a58c45efac28f0d52",
+        "mobilesdk_app_id": "1:197895555845:android:633f54d2b33be3bd78456c",
         "android_client_info": {
           "package_name": "com.example.studyfy"
         }
@@ -15,26 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBNHcbqrCG2w6lQwcdA_eG11hTaznEFZuA"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:371502097175:android:37fb8291c108ca4a8f0d52",
-        "android_client_info": {
-          "package_name": "com.example.todoapp"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBNHcbqrCG2w6lQwcdA_eG11hTaznEFZuA"
+          "current_key": "AIzaSyC6ITLuzoWLT7XERVgH2v1zjDwuqG7E138"
         }
       ],
       "services": {
