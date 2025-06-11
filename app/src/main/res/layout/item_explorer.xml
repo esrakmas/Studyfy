@@ -33,10 +33,10 @@
             android:textSize="14sp"/>
 
         <TextView
-            android:id="@+id/tvTopic"
+            android:id="@+id/tvType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Konu"
+            android:text="tip not mu soru mu"
             android:textSize="12sp"
             android:textColor="#666"/>
 

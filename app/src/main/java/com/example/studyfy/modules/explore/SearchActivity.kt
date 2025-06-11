@@ -16,47 +16,62 @@ class SearchActivity : AppCompatActivity() {
 
     private val tabTitles = arrayOf("Notlar", "Sorular", "Hesaplar")
 
+    // Fragment referanslarını saklayalım ki arama sorgusunu gönderebilelim
+    private lateinit var searchNoteFragment: SearchNoteFragment
+    private lateinit var searchQuestionsFragment: SearchQuestionsFragment
+    private lateinit var searchUserFragment: SearchUserFragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // SearchView odaklama ve klavye açma
         binding.searchView2.isIconified = false
         binding.searchView2.requestFocus()
 
         val imm = getSystemService<InputMethodManager>()
         imm?.showSoftInput(binding.searchView2.findFocus(), InputMethodManager.SHOW_IMPLICIT)
 
-        // ViewPager2 adapteri ayarla
+        // Fragmentları oluşturuyoruz
+        searchNoteFragment = SearchNoteFragment()
+        searchQuestionsFragment = SearchQuestionsFragment()
+        searchUserFragment = SearchUserFragment()
+
         binding.viewPager.adapter = object : FragmentStateAdapter(this) {
             override fun getItemCount(): Int = 3
 
             override fun createFragment(position: Int): Fragment = when (position) {
-                0 -> SearchNoteFragment()
-                1 -> SearchQuestionsFragment()
-                2 -> SearchUserFragment()
+                0 -> searchNoteFragment
+                1 -> searchQuestionsFragment
+                2 -> searchUserFragment
                 else -> throw IllegalStateException("Pozisyon bulunamadı")
             }
         }
 
-        // TabLayout ve ViewPager2'yi bağla
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = tabTitles[position]
         }.attach()
 
-        // SearchView listener ekle (isteğe bağlı)
         binding.searchView2.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                // Arama yapıldığında işlemler buraya
+                // İstersen buraya da aynı arama gönderilebilir
+                query?.let { searchInCurrentTab(it) }
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                // Yazı değiştiğinde fragmentlere arama sorgusu iletilebilir
+                newText?.let { searchInCurrentTab(it) }
                 return true
             }
         })
+    }
+
+    private fun searchInCurrentTab(query: String) {
+        when (binding.viewPager.currentItem) {
+            0 -> searchNoteFragment.searchNotes(query)
+            1 -> searchQuestionsFragment.searchQuestions(query)
+            2 -> searchUserFragment.searchUsers(query)
+        }
     }
 }

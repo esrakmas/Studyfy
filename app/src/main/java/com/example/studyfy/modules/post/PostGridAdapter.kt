@@ -9,9 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.studyfy.R
-import com.example.studyfy.databinding.ItemPostGridBinding
+import com.example.studyfy.databinding.ItemExplorerBinding
 import com.example.studyfy.modules.db.Post
-
 import com.example.studyfy.modules.shared.PostDetailFragment
 
 class PostGridAdapter(
@@ -26,25 +25,33 @@ class PostGridAdapter(
     override fun getItemId(position: Int): Long = position.toLong()
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val binding: ItemPostGridBinding
+        val binding: ItemExplorerBinding
         val view: View
 
         if (convertView == null) {
-            binding = ItemPostGridBinding.inflate(LayoutInflater.from(context), parent, false)
+            binding = ItemExplorerBinding.inflate(LayoutInflater.from(context), parent, false)
             view = binding.root
             view.tag = binding
         } else {
             view = convertView
-            binding = view.tag as ItemPostGridBinding
+            binding = view.tag as ItemExplorerBinding
         }
 
         val post = postList[position]
 
+        // Görsel yükleme
         Glide.with(context)
             .load(post.imageUrl)
-            .into(binding.imagePost)
+            .centerCrop()
+            .placeholder(R.drawable.ic_launcher_background)
+            .into(binding.itemImage)
 
-        // Tıklama işlemi - ViewModel ile veri paylaş, Fragment değiştir
+        // TextView'lara veri seti
+        binding.tvSubject.text = post.subject ?: "Ders Yok"
+        binding.tvType.text = post.type?.replaceFirstChar { it.uppercase() } ?: "Bilinmiyor"
+        binding.tvLevel.text = post.topic ?: "Seviye Yok"
+
+        // Tıklama - ViewModel aracılığı ile post'u set et ve fragment değiştir
         view.setOnClickListener {
             (context as? AppCompatActivity)?.let { activity ->
                 val viewModel = ViewModelProvider(activity)[PostViewModel::class.java]

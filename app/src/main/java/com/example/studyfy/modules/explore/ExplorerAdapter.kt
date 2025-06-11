@@ -14,7 +14,7 @@ class ExplorerAdapter(private var items: List<ExplorerItem>) :
     inner class ExplorerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val image: ImageView = view.findViewById(R.id.itemImage)
         val subject: TextView = view.findViewById(R.id.tvSubject)
-        val topic: TextView = view.findViewById(R.id.tvTopic)
+        val topic: TextView = view.findViewById(R.id.tvType)
         val level: TextView = view.findViewById(R.id.tvLevel)
     }
 
