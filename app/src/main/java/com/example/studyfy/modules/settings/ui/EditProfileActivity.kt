@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.cloudinary.android.MediaManager
 import com.example.studyfy.R
 import com.example.studyfy.modules.db.CloudinaryService
+import com.example.studyfy.repository.UserRepository
 import java.io.File
 
 class EditProfileActivity : AppCompatActivity() {
@@ -58,11 +59,21 @@ class EditProfileActivity : AppCompatActivity() {
             if (imageUrl != null) {
                 Toast.makeText(this, "Fotoğraf yüklendi!", Toast.LENGTH_SHORT).show()
                 Glide.with(this).load(imageUrl).into(profileImage)
-                // İsteğe bağlı: imageUrl Firestore'a kaydedilebilir
+
+                // ✅ Firestore'a kaydet
+                UserRepository.updateProfilePhotoUrl(imageUrl) { success ->
+                    if (success) {
+                        Toast.makeText(this, "Profil resmi güncellendi!", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this, "Profil resmi güncellenemedi!", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
             } else {
                 Toast.makeText(this, "Yükleme başarısız!", Toast.LENGTH_SHORT).show()
             }
         }
     }
+
 
 }

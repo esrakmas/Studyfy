@@ -35,4 +35,12 @@ object UserRepository {
                 onResult(null)
             }
     }
+
+    fun updateProfilePhotoUrl(photoUrl: String, onResult: (Boolean) -> Unit) {
+        val userId = auth.currentUser?.uid ?: return onResult(false)
+        db.collection("users").document(userId)
+            .update("profileImageUrl", photoUrl)
+            .addOnSuccessListener { onResult(true) }
+            .addOnFailureListener { onResult(false) }
+    }
 }

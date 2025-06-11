@@ -72,11 +72,12 @@ class SignUpActivity : AppCompatActivity() {
                         "username" to username,
                         "email" to email,
                         "biography" to "",
-                        "gradeLevel" to "11",
+                        "gradeLevel" to "",
+                        "profileImageUrl" to "", // ✅ Bu satırı ekle
                         "followers" to listOf<String>(),
-                        "following" to listOf<String>(),
-
+                        "following" to listOf<String>()
                     )
+
 
 
                     // Firestore'a kullanıcı verisini ekle

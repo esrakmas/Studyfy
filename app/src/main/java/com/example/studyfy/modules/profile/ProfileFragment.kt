@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.studyfy.R
 import com.example.studyfy.modules.settings.ui.SettingsActivity
 import com.example.studyfy.repository.UserRepository
@@ -19,6 +20,7 @@ class ProfileFragment : Fragment() {
     private lateinit var followingCount: TextView
     private lateinit var postsCount: TextView
     private lateinit var settingsIcon: ImageView
+    private lateinit var profileImageView: ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,18 +32,15 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // UI referansları bağla
         tvUsername = view.findViewById(R.id.username)
         tvBio = view.findViewById(R.id.bio)
         followersCount = view.findViewById(R.id.followers_count)
         followingCount = view.findViewById(R.id.following_count)
         postsCount = view.findViewById(R.id.posts_count)
         settingsIcon = view.findViewById(R.id.settings_icon)
+        profileImageView = view.findViewById(R.id.profile_image) // 🔥 Eklendi
 
-        // Ayarlar ikonuna tıklanınca
         settingsIcon.setOnClickListener {
-            startActivity(Intent(activity, SettingsActivity::class.java))
-            // SettingsActivity'ye geçiş yapmak
             val intent = Intent(activity, SettingsActivity::class.java)
             startActivity(intent)
         }
@@ -50,16 +49,21 @@ class ProfileFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        // Her seferinde kullanıcı verisini yeniden çek
         UserRepository.getCurrentUser { user ->
             if (user != null) {
                 tvUsername.text = "@${user.username}"
                 tvBio.text = user.biography.ifBlank { "Henüz biyografi eklenmedi" }
                 followersCount.text = user.followers.size.toString()
                 followingCount.text = user.following.size.toString()
-
-                // Post sayısı kısmı (ileride güncellenecek)
                 postsCount.text = "0"
+
+                // 🔥 Profil fotoğrafı yükleme
+                if (user.profileImageUrl.isNotBlank()) {
+                    Glide.with(requireContext())
+                        .load(user.profileImageUrl)
+                        .placeholder(R.drawable.ic_launcher_background)
+                        .into(profileImageView)
+                }
             } else {
                 Toast.makeText(requireContext(), "Kullanıcı verisi alınamadı", Toast.LENGTH_SHORT).show()
             }

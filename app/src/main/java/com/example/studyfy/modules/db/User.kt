@@ -4,7 +4,7 @@ data class User(
     val email: String = "",
     val biography: String = "",
     val gradeLevel: String = "",
+    val profileImageUrl: String = "", // 🔥 Eklenen alan
     val followers: List<String> = emptyList(),
-    val following: List<String> = emptyList(),
-
+    val following: List<String> = emptyList()
 )
