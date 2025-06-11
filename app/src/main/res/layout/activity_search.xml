@@ -1,37 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="8dp"
-    android:background="@drawable/img_background">
+    android:padding="8dp">
 
-    <!-- Arama Çubuğu -->
     <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchView1"
+        android:id="@+id/searchView2"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="8dp"
-        android:queryHint="Dersin Adı"
+        android:queryHint="Ara..."
         android:background="@drawable/input_background_trasparan"
         android:iconifiedByDefault="false"
         android:theme="@style/SearchViewStyle" />
 
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       color="@color/Blue" />
 
-    <!-- Gönderiler için Grid RecyclerView -->
-    <GridView
-        android:id="@+id/posts_grid_exp"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:numColumns="3"
-        android:verticalSpacing="8dp"
-        android:horizontalSpacing="8dp"
-        android:padding="8dp"
-        android:clipToPadding="false"
-        />
-
-
+        android:layout_weight="1" />
 </LinearLayout>

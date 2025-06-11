@@ -1,11 +1,13 @@
 package com.example.studyfy.modules.explore
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.GridView
+import android.widget.SearchView
 import com.example.studyfy.R
 import com.example.studyfy.modules.db.Post
 import com.example.studyfy.modules.post.PostGridAdapter
@@ -25,12 +27,20 @@ class ExploreFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_explore, container, false)
 
-        gridView = view.findViewById(R.id.posts_grid_exp) // ID GridView de olsa olabilir
+        gridView = view.findViewById(R.id.posts_grid_exp)
         postAdapter = PostGridAdapter(requireContext(), postList)
         gridView.adapter = postAdapter
 
-        fetchPostsFromFirestore()
+        val searchView = view.findViewById<androidx.appcompat.widget.SearchView>(R.id.searchView1)
+        searchView.setOnQueryTextFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                val intent = Intent(requireContext(), SearchActivity::class.java)
+                startActivity(intent)
+                searchView.clearFocus() // Kullanıcı klavyeye tıklamadan önce ekranı temizle
+            }
+        }
 
+        fetchPostsFromFirestore()
         return view
     }
 
