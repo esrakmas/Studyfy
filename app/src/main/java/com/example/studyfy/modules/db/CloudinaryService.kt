@@ -19,19 +19,19 @@ object CloudinaryService {
         MediaManager.init(context, config)
     }
 
-    fun uploadImage(imageUri: String, onResult: (String?) -> Unit) {
-        MediaManager.get().upload(imageUri)
+    fun uploadImage(imagePath: String, onResult: (String?) -> Unit) {
+        MediaManager.get().upload(imagePath)
             .callback(object : UploadCallback {
                 override fun onStart(requestId: String) {}
                 override fun onProgress(requestId: String, bytes: Long, totalBytes: Long) {}
                 override fun onSuccess(requestId: String, resultData: Map<*, *>) {
-                    Log.d("CLOUDINARY_UPLOAD", "Upload Success: $resultData")  // BU SATIRI EKLE
                     val url = resultData["secure_url"] as? String
+                    Log.d("CloudinaryUpload", "Başarılı yükleme: $url")
                     onResult(url)
                 }
 
-
                 override fun onError(requestId: String, error: com.cloudinary.android.callback.ErrorInfo) {
+                    Log.e("CloudinaryUpload", "Yükleme hatası: ${error.description}")
                     onResult(null)
                 }
 

@@ -1,45 +1,32 @@
 package com.example.studyfy.modules.db
 
-
-import User
-import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
-import java.util.*
+
+import com.google.firebase.auth.FirebaseAuth
 
 object FirestoreManager {
     private val db = FirebaseFirestore.getInstance()
+    private val auth = FirebaseAuth.getInstance()
 
-    fun registerUser(user: User, onSuccess: () -> Unit, onFailure: (Exception) -> Unit) {
-        db.collection("users")
-            .document(user.userId)
-            .set(user)
+    fun uploadPost(
+        post: Post,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        val userId = auth.currentUser?.uid
+        if (userId == null) {
+            onFailure(Exception("Kullanıcı giriş yapmamış!"))
+            return
+        }
+
+        val postWithUser = post.copy(
+            userId = userId,
+            createdAt = com.google.firebase.Timestamp.now()
+        )
+
+        db.collection("posts")
+            .add(postWithUser)
             .addOnSuccessListener { onSuccess() }
             .addOnFailureListener { onFailure(it) }
-    }
-
-    fun uploadPost(post: Post, onSuccess: () -> Unit, onFailure: (Exception) -> Unit) {
-        db.collection("posts")
-            .add(post.copy(createdAt = Timestamp(Date())))
-            .addOnSuccessListener { onSuccess() }
-            .addOnFailureListener { onFailure(it) }
-    }
-
-    fun getAllPosts(onSuccess: (List<Post>) -> Unit) {
-        db.collection("posts")
-            .orderBy("createdAt")
-            .get()
-            .addOnSuccessListener { result ->
-                val postList = result.documents.mapNotNull { it.toObject(Post::class.java) }
-                onSuccess(postList)
-            }
-    }
-
-    fun getAllUsers(onSuccess: (List<User>) -> Unit) {
-        db.collection("users")
-            .get()
-            .addOnSuccessListener { result ->
-                val users = result.documents.mapNotNull { it.toObject(User::class.java) }
-                onSuccess(users)
-            }
     }
 }
