@@ -1,21 +1,57 @@
 package com.example.studyfy.modules.db
 
+
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 
 object PostRepository {
-    private val db = FirebaseFirestore.getInstance()
-    private val postsCollection = db.collection("posts")
 
-    fun getUserPosts(userId: String, callback: (List<Post>) -> Unit) {
-        postsCollection
-            .whereEqualTo("userId", userId)
-            .get()
-            .addOnSuccessListener { result ->
-                val posts = result.documents.mapNotNull { it.toObject(Post::class.java) }
-                callback(posts)
-            }
-            .addOnFailureListener {
-                callback(emptyList())
-            }
+    private val auth = FirebaseAuth.getInstance()
+    private val db = FirebaseFirestore.getInstance()
+
+    // Like toggle işlemi
+    fun toggleLike(post: Post, onComplete: (updatedPost: Post?) -> Unit) {
+        val userId = auth.currentUser?.uid ?: return onComplete(null)
+        val postRef = db.collection("posts").document(post.postId)
+
+        val isLiked = post.likes.contains(userId)
+
+        val updateTask = if (isLiked) {
+            postRef.update("likes", FieldValue.arrayRemove(userId))
+        } else {
+            postRef.update("likes", FieldValue.arrayUnion(userId))
+        }
+
+        updateTask.addOnSuccessListener {
+            // Yeni listeyi güncelle
+            val updatedLikes = if (isLiked) post.likes - userId else post.likes + userId
+            val updatedPost = post.copy(likes = updatedLikes)
+            onComplete(updatedPost)
+        }.addOnFailureListener {
+            onComplete(null)
+        }
+    }
+
+    // Save toggle işlemi
+    fun toggleSave(post: Post, onComplete: (updatedPost: Post?) -> Unit) {
+        val userId = auth.currentUser?.uid ?: return onComplete(null)
+        val postRef = db.collection("posts").document(post.postId)
+
+        val isSaved = post.savedBy.contains(userId)
+
+        val updateTask = if (isSaved) {
+            postRef.update("savedBy", FieldValue.arrayRemove(userId))
+        } else {
+            postRef.update("savedBy", FieldValue.arrayUnion(userId))
+        }
+
+        updateTask.addOnSuccessListener {
+            val updatedSavedBy = if (isSaved) post.savedBy - userId else post.savedBy + userId
+            val updatedPost = post.copy(savedBy = updatedSavedBy)
+            onComplete(updatedPost)
+        }.addOnFailureListener {
+            onComplete(null)
+        }
     }
 }

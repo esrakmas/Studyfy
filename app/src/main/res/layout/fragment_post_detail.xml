@@ -6,12 +6,15 @@
     android:layout_height="wrap_content"
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp"
-    android:layout_margin="8dp">
+    android:layout_margin="8dp"
+  >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingTop="80dp"
+        android:paddingBottom="32dp">
 
         <!-- Üst Kısım: Kullanıcı bilgileri -->
         <LinearLayout
@@ -117,7 +120,7 @@
 
             <!-- Kaydet -->
             <ImageView
-                android:id="@+id/btnShare"
+                android:id="@+id/btnSave"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_bookmark"/>

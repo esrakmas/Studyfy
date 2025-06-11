@@ -37,8 +37,6 @@ class EditProfileActivity : AppCompatActivity() {
 
         profileImage = findViewById(R.id.profile_image)
 
-        // Cloudinary başlat
-        CloudinaryService.init(this)
 
         // Görsele tıklanırsa galeri aç
         profileImage.setOnClickListener {

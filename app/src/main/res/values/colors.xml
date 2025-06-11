@@ -12,5 +12,7 @@
     <color name="Blue">#2F89FC</color> <!-- Soluk Mavi -->
     <color name="selected_color">#FF6200EE</color>  <!-- Seçili öğe rengi -->
     <color name="unselected_color">#FF888888</color>  <!-- Seçili olmayan öğe rengi -->
-
+    <color name="red_700">#D32F2F</color>      <!-- Koyu kırmızı -->
+    <color name="blue_700">#1976D2</color>     <!-- Koyu mavi -->
+    <color name="gray_500">#9E9E9E</color>     <!-- Orta gri -->
 </resources>
