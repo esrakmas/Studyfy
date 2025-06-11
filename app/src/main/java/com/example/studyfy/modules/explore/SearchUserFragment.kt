@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.studyfy.R
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 
 class SearchUserFragment : Fragment() {
@@ -17,19 +18,44 @@ class SearchUserFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private val firestore = FirebaseFirestore.getInstance()
 
-    private var userList: MutableList<User> = mutableListOf()
+    private val userList = mutableListOf<User>()
     private lateinit var adapter: UserAdapter
+    private val currentUserId = "mevcut_kullanici_id" // Bunu auth ile çek
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_search_user, container, false)
         recyclerView = view.findViewById(R.id.recyclerViewUsers)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        adapter = UserAdapter(userList)
+
+        adapter = UserAdapter(currentUserId, userList) { userToFollow ->
+            followUser(userToFollow)
+        }
         recyclerView.adapter = adapter
         return view
     }
 
+    private fun followUser(userToFollow: User) {
+        val currentUserRef = firestore.collection("users").document(currentUserId)
+        val userToFollowRef = firestore.collection("users").document(userToFollow.userId)
+
+        firestore.runBatch { batch ->
+            // currentUser'ın following listesine ekle
+            batch.update(currentUserRef, "following", FieldValue.arrayUnion(userToFollow.userId))
+            // userToFollow'un followers listesine ekle
+            batch.update(userToFollowRef, "followers", FieldValue.arrayUnion(currentUserId))
+        }.addOnSuccessListener {
+            Toast.makeText(requireContext(), "${userToFollow.username} takip edildi", Toast.LENGTH_SHORT).show()
+            // Güncel veriyi yeniden çek veya kullanıcı listesini güncelle
+            searchUsers(lastQuery)
+        }.addOnFailureListener {
+            Toast.makeText(requireContext(), "Takip işlemi başarısız", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private var lastQuery = ""
+
     fun searchUsers(query: String) {
+        lastQuery = query
         if (query.isBlank()) {
             userList.clear()
             adapter.notifyDataSetChanged()
@@ -55,25 +81,5 @@ class SearchUserFragment : Fragment() {
             .addOnFailureListener {
                 Toast.makeText(requireContext(), "Kullanıcı aramada hata oluştu", Toast.LENGTH_SHORT).show()
             }
-    }
-
-    class UserAdapter(private val users: List<User>) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
-
-        inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            val textView = itemView.findViewById<android.widget.TextView>(android.R.id.text1)
-        }
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-            val view = LayoutInflater.from(parent.context)
-                .inflate(android.R.layout.simple_list_item_1, parent, false)
-            return UserViewHolder(view)
-        }
-
-        override fun getItemCount(): Int = users.size
-
-        override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-            val user = users[position]
-            holder.textView.text = "${user.username} - ${user.biography}"
-        }
     }
 }
