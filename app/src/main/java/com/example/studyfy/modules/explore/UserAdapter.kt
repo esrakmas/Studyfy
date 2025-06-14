@@ -12,7 +12,7 @@ import com.example.studyfy.databinding.ItemSuggestionUserBinding
 class UserAdapter(
     private val currentUserId: String,
     private val users: MutableList<User>,
-    private val onFollowClicked: (User) -> Unit
+    private val onFollowToggle: (User, Boolean) -> Unit // isFollowed bilgisi ile birlikte
 ) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
     inner class UserViewHolder(val binding: ItemSuggestionUserBinding) : RecyclerView.ViewHolder(binding.root)
@@ -26,24 +26,29 @@ class UserAdapter(
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val user = users[position]
-        with(holder.binding) {
-            textUsername.text = user.username
-            textBiography.text = user.biography
+        val binding = holder.binding
 
-            Glide.with(holder.binding.root.context)
-                .load(user.profileImageUrl)
-                .circleCrop()
-                .placeholder(R.drawable.ic_launcher_background)
-                .error(R.drawable.ic_launcher_background)
-                .into(holder.binding.imageProfile)
+        binding.textUsername.text = user.username
+        binding.textBiography.text = user.biography
 
+        Glide.with(binding.root.context)
+            .load(user.profileImageUrl)
+            .circleCrop()
+            .placeholder(R.drawable.ic_launcher_background)
+            .error(R.drawable.ic_launcher_background)
+            .into(binding.imageProfile)
 
-            // Takip durumunu kontrol et
-            val isFollowed = user.followers.contains(currentUserId)
-            buttonFollow.visibility = if (user.userId == currentUserId || isFollowed) View.GONE else View.VISIBLE
+        val isFollowed = user.followers.contains(currentUserId)
 
-            buttonFollow.setOnClickListener {
-                onFollowClicked(user)
+        // Eğer kullanıcı kendisiyse butonu gizle
+        if (user.userId == currentUserId) {
+            binding.buttonFollow.visibility = View.GONE
+        } else {
+            binding.buttonFollow.visibility = View.VISIBLE
+            binding.buttonFollow.text = if (isFollowed) "Takip Ediliyor" else "Takip Et"
+
+            binding.buttonFollow.setOnClickListener {
+                onFollowToggle(user, isFollowed)
             }
         }
     }
