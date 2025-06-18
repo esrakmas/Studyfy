@@ -48,7 +48,6 @@ class AddNoteFragment : Fragment() {
         val classList = listOf("9. Sınıf", "10. Sınıf", "11. Sınıf", "12. Sınıf")
         val subjectList = listOf("Matematik", "Fizik", "Kimya", "Biyoloji", "Tarih")
 
-        // Adapter oluştur ve spinner'a bağla
         val classAdapter = ArrayAdapter(requireContext(), R.layout.simple_spinner_item, classList)
         classAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerSelectClass.adapter = classAdapter
@@ -56,7 +55,6 @@ class AddNoteFragment : Fragment() {
         val subjectAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, subjectList)
         subjectAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerSelectSubject.adapter = subjectAdapter
-
 
         binding.ivNoteImage.setOnClickListener {
             pickImageLauncher.launch("image/*")
@@ -96,7 +94,6 @@ class AddNoteFragment : Fragment() {
                 Toast.makeText(requireContext(), "Resim yolu alınamadı", Toast.LENGTH_SHORT).show()
             }
         }
-
     }
 
     private fun saveNoteToFirestore(
@@ -107,17 +104,18 @@ class AddNoteFragment : Fragment() {
         isPrivate: Boolean
     ) {
         val post = Post(
+            postId = "", // FirestoreManager'da atanacak
+            userId = "", // FirestoreManager'da atanacak
             type = "note",
             subject = selectedSubject,
             topic = selectedClass,
             description = description,
             imageUrl = imageUrl,
             isPrivate = isPrivate,
-            userId = "",
             likes = emptyList(),
             savedBy = emptyList(),
             commentsCount = 0,
-            createdAt = null
+            createdAt = null // FirestoreManager'da atanacak
         )
 
         FirestoreManager.uploadPost(post, {
@@ -144,7 +142,6 @@ class AddNoteFragment : Fragment() {
         _binding = null
     }
 
-    // ✅ URI -> String (gerçek dosya yolu) çevirici
     private fun getRealPathFromUri(uri: Uri): String? {
         val projection = arrayOf(MediaStore.Images.Media.DATA)
         val cursor: Cursor? = requireContext().contentResolver.query(uri, projection, null, null, null)

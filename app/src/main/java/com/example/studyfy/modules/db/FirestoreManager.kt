@@ -1,8 +1,8 @@
 package com.example.studyfy.modules.db
 
-import com.google.firebase.firestore.FirebaseFirestore
-
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.Timestamp
 
 object FirestoreManager {
     private val db = FirebaseFirestore.getInstance()
@@ -19,13 +19,14 @@ object FirestoreManager {
             return
         }
 
-        val postWithUser = post.copy(
+        val newDocRef = db.collection("posts").document()
+        val postWithAllData = post.copy(
+            postId = newDocRef.id,
             userId = userId,
-            createdAt = com.google.firebase.Timestamp.now()
+            createdAt = Timestamp.now()
         )
 
-        db.collection("posts")
-            .add(postWithUser)
+        newDocRef.set(postWithAllData)
             .addOnSuccessListener { onSuccess() }
             .addOnFailureListener { onFailure(it) }
     }

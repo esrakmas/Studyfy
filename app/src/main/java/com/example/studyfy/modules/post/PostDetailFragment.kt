@@ -119,14 +119,15 @@ class PostDetailFragment : Fragment() {
     }
 
     private fun updateLikeButton(isLiked: Boolean) {
-        val color = if (isLiked) R.color.red_700 else R.color.gray_500
-        binding.btnLike.setColorFilter(ContextCompat.getColor(requireContext(), color))
+        val icon = if (isLiked) R.drawable.ic_like2 else R.drawable.ic_like
+        binding.btnLike.setImageResource(icon)
     }
 
     private fun updateSaveButton(isSaved: Boolean) {
-        val color = if (isSaved) R.color.blue_700 else R.color.gray_500
-        binding.btnSave.setColorFilter(ContextCompat.getColor(requireContext(), color))
+        val icon = if (isSaved) R.drawable.ic_bookmark2 else R.drawable.ic_bookmark
+        binding.btnSave.setImageResource(icon)
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
