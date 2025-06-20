@@ -1,18 +1,24 @@
-package com.example.studyfy.modules.shared
+package com.example.studyfy.modules.post
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.studyfy.R
 import com.example.studyfy.databinding.FragmentPostDetailBinding
+import com.example.studyfy.modules.db.FirestoreManager
 import com.example.studyfy.modules.db.PostRepository
-import com.example.studyfy.modules.post.PostViewModel
 import com.example.studyfy.repository.UserRepository
+import com.google.firebase.auth.FirebaseAuth
 
 class PostDetailFragment : Fragment() {
 
@@ -22,8 +28,11 @@ class PostDetailFragment : Fragment() {
     private lateinit var viewModel: PostViewModel
     private lateinit var currentPost: com.example.studyfy.modules.db.Post
     private val currentUserId: String? by lazy {
-        com.google.firebase.auth.FirebaseAuth.getInstance().currentUser?.uid
+        FirebaseAuth.getInstance().currentUser?.uid
     }
+
+    private var currentUsername: String = ""
+    private lateinit var commentAdapter: CommentAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,42 +47,101 @@ class PostDetailFragment : Fragment() {
 
         viewModel = ViewModelProvider(requireActivity())[PostViewModel::class.java]
 
+        commentAdapter = CommentAdapter(mutableListOf())
+        binding.commentsRecyclerView.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = commentAdapter
+        }
+
+        // Başta tüm yorum alanları gizli
+        binding.commentsRecyclerView.visibility = View.GONE
+        binding.commentInputContainer.visibility = View.GONE
+
         viewModel.selectedPost.observe(viewLifecycleOwner) { post ->
-            if (post != null) {
-                currentPost = post
-                bindPost(post)
-
-                binding.btnLike.setOnClickListener {
-                    PostRepository.toggleLike(currentPost) { updatedPost ->
-                        updatedPost?.let {
-                            currentPost = it
-                            updateLikeButton(it.likes.contains(currentUserId))
-                            binding.likeCount.text = it.likes.size.toString()
-                        }
-                    }
-                }
-
-                binding.btnSave.setOnClickListener {
-                    PostRepository.toggleSave(currentPost) { updatedPost ->
-                        updatedPost?.let {
-                            currentPost = it
-                            updateSaveButton(it.savedBy.contains(currentUserId))
-                            binding.shareCount.text = it.savedBy.size.toString()
-                        }
-                    }
-                }
+            post?.let {
+                currentPost = it
+                bindPost(it)
+                setupLikeAndSaveButtons()
+                setupCommentSection()
             }
+        }
+
+        binding.btnComment.setOnClickListener {
+            toggleCommentSection()
         }
     }
 
+    private fun toggleCommentSection() {
+        val isVisible = binding.commentInputContainer.visibility == View.VISIBLE
+
+        if (!isVisible) {
+            // Göster
+            binding.commentsRecyclerView.visibility = View.VISIBLE
+            binding.commentInputContainer.visibility = View.VISIBLE
+            binding.commentEditText.requestFocus()
+
+            // Klavyeyi göster
+            val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.showSoftInput(binding.commentEditText, InputMethodManager.SHOW_IMPLICIT)
+
+            // ScrollView varsa EditText’e kaydır
+            binding.root.post {
+                (binding.root.parent as? NestedScrollView)?.smoothScrollTo(0, binding.commentEditText.bottom)
+            }
+        } else {
+            // Gizle
+            binding.commentsRecyclerView.visibility = View.GONE
+            binding.commentInputContainer.visibility = View.GONE
+
+            val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(binding.commentEditText.windowToken, 0)
+        }
+    }
+
+    private fun setupCommentSection() {
+        binding.sendCommentButton.setOnClickListener {
+            val commentText = binding.commentEditText.text.toString().trim()
+
+            if (commentText.isEmpty()) {
+                Toast.makeText(requireContext(), "Yorum boş olamaz", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (currentUsername.isEmpty()) {
+                Toast.makeText(requireContext(), "Kullanıcı adı yükleniyor, lütfen bekleyin", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            FirestoreManager.addComment(
+                currentPost.postId,
+                commentText,
+                currentUsername,
+                onSuccess = {
+                    binding.commentEditText.text.clear()
+                    hideCommentSection()
+                    loadComments(currentPost.postId)
+                },
+                onFailure = {
+                    Toast.makeText(requireContext(), "Yorum eklenemedi", Toast.LENGTH_SHORT).show()
+                }
+            )
+        }
+    }
+
+    private fun hideCommentSection() {
+        binding.commentsRecyclerView.visibility = View.GONE
+        binding.commentInputContainer.visibility = View.GONE
+
+        val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(binding.commentEditText.windowToken, 0)
+    }
+
     private fun bindPost(post: com.example.studyfy.modules.db.Post) {
-        // Kullanıcı bilgilerini userId ile çek
         UserRepository.getUserById(post.userId) { user ->
             if (user != null) {
-                // Kullanıcı adı
+                currentUsername = user.username
                 binding.username.text = user.username
 
-                // Profil fotoğrafı varsa yükle, yoksa default göster
                 if (user.profileImageUrl.isNotEmpty()) {
                     Glide.with(requireContext())
                         .load(user.profileImageUrl)
@@ -83,51 +151,76 @@ class PostDetailFragment : Fragment() {
                     binding.profileImage.setImageResource(R.drawable.ic_launcher_foreground)
                 }
             } else {
-                // Kullanıcı bulunamazsa fallback
                 binding.username.text = "Bilinmeyen Kullanıcı"
                 binding.profileImage.setImageResource(R.drawable.ic_launcher_foreground)
             }
         }
 
-        // Gönderi açıklaması
         binding.postDescription.text = post.description
-
-        // Beğeni sayısı
         binding.likeCount.text = post.likes.size.toString()
-
-        // Yorum sayısı
         binding.commentCount.text = post.commentsCount.toString()
-
-        // Kaydetme sayısı
-        binding.shareCount.text = post.savedBy.size.toString()
-
-        // Konu ve seviye
+        binding.saveCount.text = post.savedBy.size.toString()
         binding.postSubject.text = post.subject
         binding.postLevel.text = post.topic
-
-        // Gönderi türü (Not/Soru)
         binding.postType.text = if (post.type == "note") "Not" else "Soru"
 
-        // Gönderi resmi
-        Glide.with(requireContext())
-            .load(post.imageUrl)
-            .into(binding.postImage)
+        Glide.with(requireContext()).load(post.imageUrl).into(binding.postImage)
 
-        // Butonların durumunu güncelle
         updateLikeButton(post.likes.contains(currentUserId))
         updateSaveButton(post.savedBy.contains(currentUserId))
+
+        loadComments(post.postId)
     }
 
+    private fun setupLikeAndSaveButtons() {
+        binding.btnLike.setOnClickListener {
+            PostRepository.toggleLike(currentPost) { updatedPost ->
+                updatedPost?.let {
+                    currentPost = it
+                    updateLikeButton(it.likes.contains(currentUserId))
+                    binding.likeCount.text = it.likes.size.toString()
+                }
+            }
+        }
+
+        binding.btnSave.setOnClickListener {
+            PostRepository.toggleSave(currentPost) { updatedPost ->
+                updatedPost?.let {
+                    currentPost = it
+                    updateSaveButton(it.savedBy.contains(currentUserId))
+                    binding.saveCount.text = it.savedBy.size.toString()
+                }
+            }
+        }
+    }
+
+    private fun loadComments(postId: String) {
+        FirestoreManager.getComments(
+            postId,
+            onResult = { commentList ->
+                commentAdapter.updateComments(commentList)
+                binding.commentCount.text = commentList.size.toString()
+
+                if (commentList.isNotEmpty()) {
+                    binding.commentsRecyclerView.visibility = View.VISIBLE
+                } else {
+                    binding.commentsRecyclerView.visibility = View.GONE
+                }
+            },
+            onFailure = {
+                Toast.makeText(requireContext(), "Yorumlar alınamadı", Toast.LENGTH_SHORT).show()
+            }
+        )
+    }
+
+
     private fun updateLikeButton(isLiked: Boolean) {
-        val icon = if (isLiked) R.drawable.ic_like2 else R.drawable.ic_like
-        binding.btnLike.setImageResource(icon)
+        binding.btnLike.setImageResource(if (isLiked) R.drawable.ic_like2 else R.drawable.ic_like)
     }
 
     private fun updateSaveButton(isSaved: Boolean) {
-        val icon = if (isSaved) R.drawable.ic_bookmark2 else R.drawable.ic_bookmark
-        binding.btnSave.setImageResource(icon)
+        binding.btnSave.setImageResource(if (isSaved) R.drawable.ic_bookmark2 else R.drawable.ic_bookmark)
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

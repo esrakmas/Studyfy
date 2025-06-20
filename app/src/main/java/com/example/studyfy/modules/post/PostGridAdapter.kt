@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.example.studyfy.R
 import com.example.studyfy.databinding.ItemExplorerBinding
 import com.example.studyfy.modules.db.Post
-import com.example.studyfy.modules.shared.PostDetailFragment
+import com.example.studyfy.modules.post.PostDetailFragment
 
 class PostGridAdapter(
     private val context: Context,

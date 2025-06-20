@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Gereken izinler -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
@@ -17,6 +18,7 @@
         android:theme="@style/Theme.Studyfy"
         tools:targetApi="31">
 
+        <!-- Gerekli aktiviteler -->
         <activity
             android:name=".modules.explore.SearchActivity"
             android:exported="false" />
@@ -35,9 +37,13 @@
         <activity
             android:name=".modules.library.questions.QuestionsActivity"
             android:exported="false" />
+
+        <!-- PostDetailFragment büyük ihtimalle bu activity içinde -->
         <activity
             android:name=".modules.bottomBar.BottomBarActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".modules.library.report.ReportActivity"
             android:exported="false" />
@@ -61,16 +67,17 @@
             android:exported="false" />
         <activity
             android:name=".modules.settings.ui.SettingsActivity"
-            android:exported="false" /> <!-- LoginActivity, launcher activity -->
+            android:exported="false" />
+
+        <!-- Giriş aktiviteleri -->
         <activity
             android:name=".modules.authentication.login.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- SignUpActivity eklendi -->
+        </activity>
         <activity
             android:name=".modules.authentication.signUp.SignUpActivity"
             android:exported="false" />

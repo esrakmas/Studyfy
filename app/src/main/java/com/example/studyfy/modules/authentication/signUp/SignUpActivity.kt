@@ -79,7 +79,6 @@ class SignUpActivity : AppCompatActivity() {
                     )
 
 
-
                     // Firestore'a kullanıcı verisini ekle
                     db.collection("users").document(userId).set(user)
                         .addOnSuccessListener {
@@ -88,16 +87,28 @@ class SignUpActivity : AppCompatActivity() {
                             finish()
                         }
                         .addOnFailureListener { e ->
-                            Toast.makeText(this, "Veritabanı hatası: ${e.message}", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                this,
+                                "Veritabanı hatası: ${e.message}",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                 }
                 .addOnFailureListener { e ->
                     // Hata mesajlarına özel kontrol
                     val message = when {
-                        e.message?.contains("email address is already in use", ignoreCase = true) == true ->
+                        e.message?.contains(
+                            "email address is already in use",
+                            ignoreCase = true
+                        ) == true ->
                             "Bu e-posta zaten kullanılıyor."
-                        e.message?.contains("The email address is badly formatted", ignoreCase = true) == true ->
+
+                        e.message?.contains(
+                            "The email address is badly formatted",
+                            ignoreCase = true
+                        ) == true ->
                             "Geçersiz e-posta formatı."
+
                         else -> "Kayıt başarısız: ${e.message}"
                     }
                     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
