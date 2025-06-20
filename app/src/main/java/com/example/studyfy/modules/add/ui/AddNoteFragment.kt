@@ -115,7 +115,8 @@ class AddNoteFragment : Fragment() {
             likes = emptyList(),
             savedBy = emptyList(),
             commentsCount = 0,
-            createdAt = null // FirestoreManager'da atanacak
+            createdAt = null, // FirestoreManager'da atanacak
+            correctAnswer = null // "note" türü için boş
         )
 
         FirestoreManager.uploadPost(post, {
@@ -127,6 +128,7 @@ class AddNoteFragment : Fragment() {
             Toast.makeText(requireContext(), "Hata: ${error.message}", Toast.LENGTH_SHORT).show()
         })
     }
+
 
     private fun clearInputs() {
         binding.spinnerSelectClass.setSelection(0)

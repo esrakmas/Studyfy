@@ -14,5 +14,8 @@ data class Post(
     val likes: List<String> = emptyList(),
     val savedBy: List<String> = emptyList(),
     val commentsCount: Int = 0,  // Eğer kullanıyorsan, yoksa kaldır
-    val createdAt: Timestamp? = null
+    val createdAt: Timestamp? = null,
+
+    // Sadece soru ise kullanılır
+    val correctAnswer: String? = null
 )
