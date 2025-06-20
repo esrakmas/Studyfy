@@ -29,10 +29,10 @@
             android:name=".modules.library.quiz.quiz_lessons.QuizLessonsActivity"
             android:exported="false" />
         <activity
-            android:name=".modules.library.notes.notes_lessons.NotesLessonsActivity"
+            android:name=".modules.library.notes.NotesLessonsActivity"
             android:exported="false" />
         <activity
-            android:name=".modules.library.questions.questions_lessons.QuestionsLessonsActivity"
+            android:name=".modules.library.questions.QuestionsLessonsActivity"
             android:exported="false" />
         <activity
             android:name=".modules.library.questions.QuestionsActivity"

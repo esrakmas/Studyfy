@@ -68,4 +68,21 @@ object FirestoreManager {
             .addOnFailureListener { onFailure(it) }
     }
 
+    fun getSavedPostsByType(userId: String, type: String, onResult: (List<Post>) -> Unit) {
+        FirebaseFirestore.getInstance()
+            .collection("posts")
+            .whereEqualTo("type", type)
+            .whereArrayContains("savedBy", userId)
+            .get()
+            .addOnSuccessListener { snapshot ->
+                val posts = snapshot.documents.mapNotNull { it.toObject(Post::class.java) }
+                onResult(posts)
+            }
+            .addOnFailureListener {
+                onResult(emptyList())
+            }
+    }
+
+
+
 }

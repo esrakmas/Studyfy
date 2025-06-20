@@ -7,11 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.studyfy.databinding.FragmentLibraryBinding
-import com.example.studyfy.modules.library.notes.notes_lessons.NotesLessonsActivity
-import com.example.studyfy.modules.library.questions.questions_lessons.QuestionsLessonsActivity
+import com.example.studyfy.modules.library.notes.NotesLessonsActivity
+import com.example.studyfy.modules.library.questions.QuestionsLessonsActivity
 import com.example.studyfy.modules.library.quiz.quiz_lessons.QuizLessonsActivity
 import com.example.studyfy.modules.library.report.ReportListActivity
-import com.example.studyfy.modules.library.saved.SavedActivity
 
 class LibraryFragment : Fragment() {
 
@@ -35,11 +34,6 @@ class LibraryFragment : Fragment() {
     }
 
     private fun setupClickListeners() {
-        // Kaydedilenler tıklama olayı
-        binding.savedPostsLayout.setOnClickListener {
-            val intent = Intent(activity, SavedActivity::class.java)
-            startActivity(intent)
-        }
 
         // Notlar tıklama olayı
         binding.notesLayout.setOnClickListener {

@@ -14,7 +14,7 @@
         android:gravity="bottom|start"
         android:paddingStart="16dp"
         android:paddingBottom="20dp"
-        android:text="Notlar"
+        android:text="Notlar dersin adı"
         android:textColor="@android:color/white"
         android:textSize="24sp"
         android:textStyle="bold"
