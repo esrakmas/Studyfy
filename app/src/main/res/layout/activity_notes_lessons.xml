@@ -12,7 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="140dp"
         android:background="@color/DarkBlue"
-        android:text="Notlar1"
+        android:text="Kaydedilen Notlar"
         android:textColor="@android:color/white"
         android:textSize="24sp"
         android:textStyle="bold"
