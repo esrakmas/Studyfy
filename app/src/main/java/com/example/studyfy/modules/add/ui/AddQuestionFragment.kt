@@ -187,9 +187,10 @@ class AddQuestionFragment : Fragment() {
             binding.btnAnswerB,
             binding.btnAnswerC,
             binding.btnAnswerD,
-            binding.btnAnswerE
+            binding.btnAnswerE,
+            binding.btnAnswerIdk
         )
-        answerButtons.forEach { it.setBackgroundResource(R.drawable.button_background_green) }
+        answerButtons.forEach { it.setBackgroundResource(R.drawable.button_background_selected) }
     }
 
     override fun onDestroyView() {

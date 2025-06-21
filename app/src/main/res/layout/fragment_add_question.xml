@@ -94,6 +94,8 @@
                     android:layout_weight="1"
                     android:background="@drawable/button_background_green"
                     android:text="A"
+                    android:padding="8dp"
+                    android:minHeight="48dp"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 
@@ -105,6 +107,8 @@
                     android:layout_weight="1"
                     android:background="@drawable/button_background_green"
                     android:text="B"
+                    android:padding="8dp"
+                    android:minHeight="48dp"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 
@@ -116,6 +120,8 @@
                     android:layout_weight="1"
                     android:background="@drawable/button_background_green"
                     android:text="C"
+                    android:padding="8dp"
+                    android:minHeight="48dp"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 
@@ -127,6 +133,8 @@
                     android:layout_weight="1"
                     android:background="@drawable/button_background_green"
                     android:text="D"
+                    android:padding="8dp"
+                    android:minHeight="48dp"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 
@@ -138,16 +146,20 @@
                     android:layout_weight="1"
                     android:background="@drawable/button_background_green"
                     android:text="E"
+                    android:padding="8dp"
+                    android:minHeight="48dp"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
                 <Button
-                    android:id="@+id/btn_answer_ıdk"
+                    android:id="@+id/btn_answer_idk"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="4dp"
                     android:layout_weight="1"
                     android:background="@drawable/button_background_green"
-                    android:text="?"
+                    android:text="-?-"
+                    android:padding="8dp"
+                    android:minHeight="48dp"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 

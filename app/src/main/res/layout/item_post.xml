@@ -146,6 +146,17 @@
                 android:text="Açıklama buraya gelecek..."
                 android:padding="8dp"/>
 
+            <!-- Doğru Cevap -->
+            <TextView
+                android:id="@+id/postCorrectAnswer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Doğru Cevap: A"
+                android:textColor="@color/Blue"
+                android:textStyle="bold"
+                android:padding="8dp"
+                android:visibility="gone"/>
+
             <!-- Yorumlar -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/commentsRecyclerView"

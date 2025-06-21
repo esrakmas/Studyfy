@@ -168,6 +168,14 @@ class PostDetailFragment : Fragment() {
         updateLikeButton(post.likes.contains(currentUserId))
         updateSaveButton(post.savedBy.contains(currentUserId))
 
+        // ** Doğru cevabı göster **
+        if (!post.correctAnswer.isNullOrEmpty()) {
+            binding.postCorrectAnswer.visibility = View.VISIBLE
+            binding.postCorrectAnswer.text = "Doğru Cevap: ${post.correctAnswer}"
+        } else {
+            binding.postCorrectAnswer.visibility = View.GONE
+        }
+
         loadComments(post.postId)
     }
 
@@ -211,7 +219,6 @@ class PostDetailFragment : Fragment() {
             }
         )
     }
-
 
     private fun updateLikeButton(isLiked: Boolean) {
         binding.btnLike.setImageResource(if (isLiked) R.drawable.ic_like2 else R.drawable.ic_like)

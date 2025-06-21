@@ -35,6 +35,23 @@ object UserRepository {
                 onResult(null)
             }
     }
+    fun getCurrentUsername(onResult: (String?) -> Unit) {
+        val userId = auth.currentUser?.uid
+        if (userId == null) {
+            onResult(null)
+            return
+        }
+
+        db.collection("users").document(userId).get()
+            .addOnSuccessListener { document ->
+                val username = document.getString("username")
+                onResult(username)
+            }
+            .addOnFailureListener {
+                onResult(null)
+            }
+    }
+
 
     fun updateProfilePhotoUrl(photoUrl: String, onResult: (Boolean) -> Unit) {
         val userId = auth.currentUser?.uid ?: return onResult(false)
