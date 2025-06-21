@@ -12,7 +12,7 @@ import com.example.studyfy.R
 import com.example.studyfy.databinding.ItemExplorerBinding
 import com.example.studyfy.modules.db.Post
 
-class PostGridAdapter(
+class PostGridFragmentAdapter(
     private val context: Context,
     private val postList: List<Post>
 ) : BaseAdapter() {

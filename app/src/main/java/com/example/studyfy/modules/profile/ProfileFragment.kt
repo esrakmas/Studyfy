@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.studyfy.databinding.FragmentProfileBinding
 import com.example.studyfy.modules.db.Post
-import com.example.studyfy.modules.post.PostGridAdapter
+import com.example.studyfy.modules.post.PostGridFragmentAdapter
 import com.example.studyfy.modules.settings.ui.SettingsActivity
 import com.example.studyfy.repository.UserRepository
 import com.google.firebase.firestore.FirebaseFirestore
@@ -63,7 +63,7 @@ class ProfileFragment : Fragment() {
                     .addOnSuccessListener { result ->
                         val postList = result.documents.mapNotNull { it.toObject(Post::class.java) }
                         binding.postsCount.text = postList.size.toString()
-                        val adapter = PostGridAdapter(requireContext(), postList)
+                        val adapter = PostGridFragmentAdapter(requireContext(), postList)
                         binding.postsGrid.adapter = adapter
                     }
                     .addOnFailureListener {

@@ -9,20 +9,20 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.studyfy.R
 import com.example.studyfy.modules.db.Post
-import com.example.studyfy.modules.post.PostGridAdapter
+import com.example.studyfy.modules.post.PostGridFragmentAdapter
 import com.google.firebase.firestore.FirebaseFirestore
 
 class SearchNoteFragment : Fragment() {
 
     private lateinit var gridView: GridView
-    private lateinit var adapter: PostGridAdapter
+    private lateinit var adapter: PostGridFragmentAdapter
     private val firestore = FirebaseFirestore.getInstance()
     private val noteList = mutableListOf<Post>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_search_note, container, false)
         gridView = view.findViewById(R.id.gridViewNotes)
-        adapter = PostGridAdapter(requireContext(), noteList)
+        adapter = PostGridFragmentAdapter(requireContext(), noteList)
         gridView.adapter = adapter
         return view
     }

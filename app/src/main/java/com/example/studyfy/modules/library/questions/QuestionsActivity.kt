@@ -5,7 +5,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.studyfy.databinding.ActivityQuestionsBinding
 import com.example.studyfy.modules.db.FirestoreManager
-import com.example.studyfy.modules.post.PostGridAdapter
+import com.example.studyfy.modules.post.PostGridActivityAdapter
+import com.example.studyfy.modules.post.PostGridFragmentAdapter
 import com.google.firebase.auth.FirebaseAuth
 
 class QuestionsActivity : AppCompatActivity() {
@@ -33,7 +34,7 @@ class QuestionsActivity : AppCompatActivity() {
                     Toast.makeText(this, "Bu derse ait soru bulunamadı.", Toast.LENGTH_SHORT).show()
                 }
 
-                val adapter = PostGridAdapter(this, filteredQuestions)
+                val adapter = PostGridActivityAdapter(this, filteredQuestions)
                 binding.gridSaved.adapter = adapter
             }
         }
