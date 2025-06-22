@@ -67,10 +67,22 @@ class QuizActivity : AppCompatActivity() {
 
         binding.confirmButton.setOnClickListener {
             if (selectedAnswer.isNotEmpty()) {
-                val updatedAnswers = quiz.userAnswers.toMutableList()
-                updatedAnswers[currentQuestionIndex] = selectedAnswer
-                quiz = quiz.copy(userAnswers = updatedAnswers)
-                goToNextQuestion()
+                quiz?.let { quizObj ->
+                    val updatedAnswers = quizObj.userAnswers.toMutableList()
+                    updatedAnswers[currentQuestionIndex] = selectedAnswer
+                    quizObj.userAnswers = updatedAnswers
+
+                    FirestoreManager.updateQuizUserAnswers(
+                        quizId = quizObj.quizId,
+                        userAnswers = updatedAnswers,
+                        onSuccess = {
+                            goToNextQuestion()
+                        },
+                        onFailure = {
+                            Toast.makeText(this, "Cevap kaydedilemedi", Toast.LENGTH_SHORT).show()
+                        }
+                    )
+                }
             }
         }
 

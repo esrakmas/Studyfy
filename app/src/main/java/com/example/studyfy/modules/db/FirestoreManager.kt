@@ -297,6 +297,19 @@ object FirestoreManager {
         }
     }
 
+    fun updateQuizUserAnswers(
+        quizId: String,
+        userAnswers: List<String>,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        FirebaseFirestore.getInstance()
+            .collection("quizzes")
+            .document(quizId)
+            .update("userAnswers", userAnswers)
+            .addOnSuccessListener { onSuccess() }
+            .addOnFailureListener { onFailure(it) }
+    }
 
 
 }
