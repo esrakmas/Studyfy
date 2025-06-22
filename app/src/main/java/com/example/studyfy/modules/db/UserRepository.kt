@@ -60,4 +60,26 @@ object UserRepository {
             .addOnSuccessListener { onResult(true) }
             .addOnFailureListener { onResult(false) }
     }
+
+    // 🔥🔥 YENİ EKLEYECEĞİMİZ METOT: Tüm profil alanlarını güncelleyecek
+    fun updateUserProfile(
+        userId: String,
+        username: String,
+        biography: String,
+        gradeLevel: String,
+        profileImageUrl: String,
+        onResult: (Boolean) -> Unit
+    ) {
+        val updates = hashMapOf<String, Any>(
+            "username" to username,
+            "biography" to biography,
+            "gradeLevel" to gradeLevel,
+            "profileImageUrl" to profileImageUrl
+        )
+
+        db.collection("users").document(userId)
+            .update(updates)
+            .addOnSuccessListener { onResult(true) }
+            .addOnFailureListener { onResult(false) }
+    }
 }
