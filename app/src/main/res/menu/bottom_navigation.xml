@@ -4,26 +4,26 @@
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_home"
-        android:title="Home" />
+        android:title="Anasayfa" />
 
     <item
         android:id="@+id/navigation_explore"
         android:icon="@drawable/ic_search"
-        android:title="Explore" />
+        android:title="Arama" />
 
     <item
         android:id="@+id/navigation_add"
         android:icon="@drawable/ic_add"
-        android:title="Add" />
+        android:title="Ekle" />
 
     <item
         android:id="@+id/navigation_library"
         android:icon="@drawable/ic_bookmark"
-        android:title="Library" />
+        android:title="Kütüphane" />
 
     <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_person"
-        android:title="Profile" />
+        android:title="Profil" />
 
 </menu>

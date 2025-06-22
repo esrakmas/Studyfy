@@ -20,9 +20,10 @@
             android:id="@+id/imageProfile"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:scaleType="centerCrop"
             android:clipToOutline="true"
-            tools:srcCompat="@tools:sample/avatars"
+            android:background="@drawable/ic_launcher_foreground"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_foreground"
             android:contentDescription="Profile image" />
 
 
@@ -30,6 +31,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
             android:orientation="vertical">
 
             <TextView

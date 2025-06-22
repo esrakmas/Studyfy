@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="140dp"
         android:background="@color/DarkBlue"
-        android:text="Quizler - Derslerin Adları"
+        android:text="Quizlerim"
         android:textColor="@android:color/white"
         android:textSize="24sp"
         android:textStyle="bold"

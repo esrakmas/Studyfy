@@ -5,8 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="8dp"
+
     app:cardElevation="4dp"
-    android:layout_margin="8dp">
+    android:layout_margin="8dp"
+    android:paddingTop="80dp"
+    >
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/postScrollView"
@@ -19,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingTop="80dp"
+
             android:paddingBottom="32dp">
 
             <!-- Üst Kısım: Kullanıcı bilgileri -->
@@ -34,9 +37,10 @@
                     android:id="@+id/profileImage"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
+                    android:background="@drawable/ic_launcher_foreground"
                     android:scaleType="centerCrop"
                     android:src="@drawable/ic_launcher_foreground"
-                    android:background="@drawable/ic_launcher_background"/>
+                   />
 
                 <TextView
                     android:id="@+id/username"
