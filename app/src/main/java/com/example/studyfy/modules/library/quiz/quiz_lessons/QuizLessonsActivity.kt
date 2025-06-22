@@ -4,32 +4,46 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.ListView
-import androidx.activity.enableEdgeToEdge
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.studyfy.R
+import com.example.studyfy.modules.db.FirestoreManager
 import com.example.studyfy.modules.library.quiz.quiz_list.QuizListActivity
+import com.google.firebase.auth.FirebaseAuth
 
 class QuizLessonsActivity : AppCompatActivity() {
+
+    private lateinit var listView: ListView
+    private val currentUserId: String? by lazy { FirebaseAuth.getInstance().currentUser?.uid }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_quiz_lessons)
 
-        // ListView'yi bağla
-        val listView: ListView = findViewById(R.id.list_quiz_lessons2)
+        listView = findViewById(R.id.list_quiz_lessons2)
 
-        // Örnek veri (gerçek veriye göre güncellenebilir)
-        val lessons = arrayOf("Lesson 1", "Lesson 2", "Lesson 3")
+        currentUserId?.let { userId ->
+            FirestoreManager.getAllSubjectsForUserQuestions(
+                userId,
+                onComplete = { subjectList ->
+                    if (subjectList.isEmpty()) {
+                        Toast.makeText(this, "Soru bulunamadı.", Toast.LENGTH_SHORT).show()
+                    } else {
+                        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, subjectList)
+                        listView.adapter = adapter
 
-        // ListView için adapter ayarla
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, lessons)
-        listView.adapter = adapter
-
-        // Tıklama olayını ekle
-        listView.setOnItemClickListener { parent, view, position, id ->
-            // Burada QuestionsActivity'yi başlatıyoruz
-            val intent = Intent(this, QuizListActivity::class.java)
-            startActivity(intent)
-        }
+                        listView.setOnItemClickListener { _, _, position, _ ->
+                            val selectedSubject = subjectList[position]
+                            val intent = Intent(this, QuizListActivity::class.java)
+                            intent.putExtra("subject", selectedSubject)
+                            startActivity(intent)
+                        }
+                    }
+                },
+                onFailure = {
+                    Toast.makeText(this, "Veriler alınamadı.", Toast.LENGTH_SHORT).show()
+                }
+            )
+        } ?: Toast.makeText(this, "Kullanıcı oturumu yok.", Toast.LENGTH_SHORT).show()
     }
 }

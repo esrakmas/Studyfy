@@ -89,41 +89,8 @@ class PostDetailFragment : Fragment() {
             }
         } else {
             // Gizle
-            binding.commentsRecyclerView.visibility = View.GONE
-            binding.commentInputContainer.visibility = View.GONE
+            hideCommentSection()
 
-            val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(binding.commentEditText.windowToken, 0)
-        }
-    }
-
-    private fun setupCommentSection() {
-        binding.sendCommentButton.setOnClickListener {
-            val commentText = binding.commentEditText.text.toString().trim()
-
-            if (commentText.isEmpty()) {
-                Toast.makeText(requireContext(), "Yorum boş olamaz", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            if (currentUsername.isEmpty()) {
-                Toast.makeText(requireContext(), "Kullanıcı adı yükleniyor, lütfen bekleyin", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            FirestoreManager.addComment(
-                currentPost.postId,
-                commentText,
-                currentUsername,
-                onSuccess = {
-                    binding.commentEditText.text.clear()
-                    hideCommentSection()
-                    loadComments(currentPost.postId)
-                },
-                onFailure = {
-                    Toast.makeText(requireContext(), "Yorum eklenemedi", Toast.LENGTH_SHORT).show()
-                }
-            )
         }
     }
 
@@ -200,6 +167,37 @@ class PostDetailFragment : Fragment() {
             }
         }
     }
+
+    private fun setupCommentSection() {
+        binding.sendCommentButton.setOnClickListener {
+            val commentText = binding.commentEditText.text.toString().trim()
+
+            if (commentText.isEmpty()) {
+                Toast.makeText(requireContext(), "Yorum boş olamaz", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (currentUsername.isEmpty()) {
+                Toast.makeText(requireContext(), "Kullanıcı adı yükleniyor, lütfen bekleyin", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            FirestoreManager.addComment(
+                currentPost.postId,
+                commentText,
+                currentUsername,
+                onSuccess = {
+                    binding.commentEditText.text.clear()
+                    hideCommentSection()
+                    loadComments(currentPost.postId)
+                },
+                onFailure = {
+                    Toast.makeText(requireContext(), "Yorum eklenemedi", Toast.LENGTH_SHORT).show()
+                }
+            )
+        }
+    }
+
 
     private fun loadComments(postId: String) {
         FirestoreManager.getComments(

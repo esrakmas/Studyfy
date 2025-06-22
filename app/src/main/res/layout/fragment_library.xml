@@ -43,29 +43,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Kaydedilenler -->
-            <LinearLayout
-                android:id="@+id/savedPostsLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingVertical="8dp">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_bookmark"
-                    android:layout_marginEnd="12dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Kaydedilenler"
-                    android:textSize="16sp"
-                    android:textColor="@color/black" />
-            </LinearLayout>
-
             <!-- Notlar -->
             <LinearLayout
                 android:id="@+id/notesLayout"

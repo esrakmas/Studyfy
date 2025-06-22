@@ -10,6 +10,9 @@ object PostRepository {
     private val auth = FirebaseAuth.getInstance()
     private val db = FirebaseFirestore.getInstance()
 
+
+
+
     // Like toggle işlemi
     fun toggleLike(post: Post, onComplete: (updatedPost: Post?) -> Unit) {
         val userId = auth.currentUser?.uid ?: return onComplete(null)
