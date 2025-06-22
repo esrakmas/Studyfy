@@ -1,7 +1,5 @@
-package com.example.studyfy.modules.settings.ui
+package com.example.studyfy.modules.settings
 
-import android.app.Activity
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.ImageView
@@ -9,7 +7,6 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.cloudinary.android.MediaManager
 import com.example.studyfy.R
 import com.example.studyfy.modules.db.CloudinaryService
 import com.example.studyfy.repository.UserRepository

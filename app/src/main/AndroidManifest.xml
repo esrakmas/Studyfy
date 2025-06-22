@@ -57,13 +57,13 @@
             android:name=".modules.library.notes.NotesActivity"
             android:exported="false" />
         <activity
-            android:name=".modules.settings.ui.ChangePasswordActivity"
+            android:name=".modules.settings.ChangePasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".modules.settings.ui.EditProfileActivity"
+            android:name=".modules.settings.EditProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".modules.settings.ui.SettingsActivity"
+            android:name=".modules.settings.SettingsActivity"
             android:exported="false" /> <!-- Giriş aktiviteleri -->
         <activity
             android:name=".modules.authentication.login.LoginActivity"

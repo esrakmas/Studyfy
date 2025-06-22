@@ -1,9 +1,12 @@
 package com.example.studyfy.modules.db
 
 import com.example.studyfy.modules.post.Comment
+import com.google.android.gms.tasks.Task
+import com.google.android.gms.tasks.Tasks
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.Timestamp
+import com.google.firebase.firestore.FieldValue
 
 object FirestoreManager {
 
@@ -312,4 +315,99 @@ object FirestoreManager {
     }
 
 
+    // YENİ EKLENECEK METOT: Kullanıcıya ait tüm verileri silme
+    val postsCollection = db.collection("posts")
+    fun deleteUserData(
+        userId: String,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        // A list to hold all the individual deletion/update tasks
+        val tasks = mutableListOf<Task<Void>>() // Explicitly type as Task<Void> for delete/update operations
+
+        // 1. Delete the user's own document in the 'users' collection
+        val userDocRef = db.collection("users").document(userId)
+        tasks.add(userDocRef.delete())
+
+        // 2. Delete all posts created by the user
+
+        val getPostsTask: Task<Void> = postsCollection.whereEqualTo("userId", userId).get()
+            .continueWithTask { task ->
+                if (task.isSuccessful) {
+                    val postDeletionTasks = mutableListOf<Task<Void>>()
+                    for (doc in task.result!!.documents) {
+                        postDeletionTasks.add(doc.reference.delete()) // Add post deletion to list
+                    }
+                    Tasks.whenAll(postDeletionTasks) // Wait for all post deletions to complete
+                } else {
+                    Tasks.forException(task.exception ?: Exception("Failed to retrieve user posts"))
+                }
+            }
+        tasks.add(getPostsTask)
+
+
+        // 3. Delete comments made by the user across all posts (using collection group query)
+        // This query can be costly for large datasets. Consider Cloud Functions for scale.
+        val getCommentsTask: Task<Void> = db.collectionGroup("comments")
+            .whereEqualTo("userId", userId)
+            .get()
+            .continueWithTask { task ->
+                if (task.isSuccessful) {
+                    val commentDeletionTasks = mutableListOf<Task<Void>>()
+                    for (doc in task.result!!.documents) {
+                        commentDeletionTasks.add(doc.reference.delete()) // Add comment deletion to list
+                    }
+                    Tasks.whenAll(commentDeletionTasks) // Wait for all comment deletions to complete
+                } else {
+                    Tasks.forException(task.exception ?: Exception("Failed to retrieve user comments"))
+                }
+            }
+        tasks.add(getCommentsTask)
+
+
+        // 4. Delete all quiz results for the user
+        val getQuizzesTask: Task<Void> = db.collection("quizzes").whereEqualTo("userId", userId).get()
+            .continueWithTask { task ->
+                if (task.isSuccessful) {
+                    val quizDeletionTasks = mutableListOf<Task<Void>>()
+                    for (doc in task.result!!.documents) {
+                        quizDeletionTasks.add(doc.reference.delete()) // Add quiz deletion to list
+                    }
+                    Tasks.whenAll(quizDeletionTasks) // Wait for all quiz deletions to complete
+                } else {
+                    Tasks.forException(task.exception ?: Exception("Failed to retrieve user quizzes"))
+                }
+            }
+        tasks.add(getQuizzesTask)
+
+
+        // 5. Remove user's ID from 'savedBy' arrays in other users' posts
+        // This is also potentially slow and costly if many posts are saved by the user.
+        val updateSavedByTask: Task<Void> = postsCollection.whereArrayContains("savedBy", userId).get()
+            .continueWithTask { task ->
+                if (task.isSuccessful) {
+                    val batch = db.batch() // Use a batch for multiple updates for efficiency
+                    for (doc in task.result!!.documents) {
+                        batch.update(doc.reference, "savedBy", FieldValue.arrayRemove(userId))
+                    }
+                    batch.commit() // Commit the batch as a single task
+                } else {
+                    Tasks.forException(task.exception ?: Exception("Failed to retrieve saved posts"))
+                }
+            }
+        tasks.add(updateSavedByTask)
+
+
+        // After all individual data retrieval and sub-deletion tasks are added,
+        // wait for all of them to complete.
+        Tasks.whenAll(tasks) // Use Tasks.whenAll for a list of Task<Void>
+            .addOnSuccessListener {
+                onSuccess() // All data deletion tasks completed successfully
+            }
+            .addOnFailureListener { e ->
+                // If any of the deletion tasks failed, this will be called
+                onFailure(e)
+            }
+
+}
 }
