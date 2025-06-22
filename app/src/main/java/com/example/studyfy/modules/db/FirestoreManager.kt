@@ -265,6 +265,38 @@ object FirestoreManager {
             }
             .addOnFailureListener { onFailure(it) }
     }
+    fun getPostsByIds(
+        postIds: List<String>,
+        onSuccess: (List<Post>) -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        if (postIds.isEmpty()) {
+            onSuccess(emptyList())
+            return
+        }
+
+        // Firestore whereIn sorgusunda max 10 id sorgulanabilir
+        val chunks = postIds.chunked(10)
+        val allPosts = mutableListOf<Post>()
+        var completed = 0
+        for (chunk in chunks) {
+            db.collection("posts")
+                .whereIn("postId", chunk)
+                .get()
+                .addOnSuccessListener { snapshot ->
+                    val posts = snapshot.toObjects(Post::class.java)
+                    allPosts.addAll(posts)
+                    completed++
+                    if (completed == chunks.size) {
+                        onSuccess(allPosts)
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    onFailure(exception)
+                }
+        }
+    }
+
 
 
 }

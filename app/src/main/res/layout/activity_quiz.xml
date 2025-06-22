@@ -51,10 +51,10 @@
         <TextView
             android:id="@+id/timer"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="01:53"
             android:textColor="@color/black"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
     </LinearLayout>
 
     <!-- Soru Bilgileri (Kaçıncı soru, toplam soru, sınav türü, ders türü) -->
@@ -148,6 +148,7 @@
         app:layout_constraintTop_toBottomOf="@id/imageView6">
 
         <Button
+            android:id="@+id/optionA"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_margin="4dp"
@@ -155,6 +156,7 @@
             android:text="A"/>
 
         <Button
+            android:id="@+id/optionB"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_margin="4dp"
@@ -162,6 +164,7 @@
             android:text="B"/>
 
         <Button
+            android:id="@+id/optionC"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_margin="4dp"
@@ -169,6 +172,7 @@
             android:text="C"/>
 
         <Button
+            android:id="@+id/optionD"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_margin="4dp"
@@ -176,6 +180,7 @@
             android:text="D"/>
 
         <Button
+            android:id="@+id/optionE"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_margin="4dp"
@@ -213,9 +218,20 @@
             android:padding="8dp"
             android:src="@drawable/ic_lightbulb"
             app:tint="@color/white"/>
+        <Button
+            android:id="@+id/confirm_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Onayla"
+            android:textColor="@color/white"
+            android:background="@drawable/button_background_darkblue"
+            android:layout_margin="16dp"
+            app:layout_constraintEnd_toStartOf="@id/skip_button"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
     </LinearLayout>
 
-    <!-- Atla Butonu -->
+
     <Button
         android:id="@+id/skip_button"
         android:layout_width="wrap_content"
@@ -226,4 +242,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@drawable/button_background_darkblue"
         android:layout_margin="16dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,7 +8,7 @@ data class Quiz(
     val userId: String = "",
     val subject: String = "",
     val questions: List<String> = listOf(),       // postId listesi
-    val userAnswers: List<String> = listOf(),     // Kullanıcının seçtiği şıklar (örneğin "A", "B", ...)
+    var userAnswers: List<String> = listOf(),     // Kullanıcının seçtiği şıklar (örneğin "A", "B", ...)
     val correctAnswers: List<String?> = listOf(),  // Doğru cevaplar
     val createdAt: Timestamp = Timestamp.now()
 )
