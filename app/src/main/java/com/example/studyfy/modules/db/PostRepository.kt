@@ -11,7 +11,25 @@ object PostRepository {
     private val db = FirebaseFirestore.getInstance()
 
 
+    private val postsCollection = db.collection("posts") // Düzeltildi
 
+    // YENİ EKLENECEK METOT:
+    fun getPostById(postId: String, onResult: (Post?) -> Unit) {
+        postsCollection.document(postId)
+            .get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+                    val post = document.toObject(Post::class.java)
+                    onResult(post)
+                } else {
+                    onResult(null)
+                }
+            }
+            .addOnFailureListener { e ->
+                // Hata durumunu loglayabilir veya kullanıcıya bildirebilirsiniz
+                onResult(null)
+            }
+    }
 
     // Like toggle işlemi
     fun toggleLike(post: Post, onComplete: (updatedPost: Post?) -> Unit) {

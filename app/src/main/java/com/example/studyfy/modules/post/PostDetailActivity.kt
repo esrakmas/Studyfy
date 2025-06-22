@@ -1,3 +1,4 @@
+// 3. PostDetailActivity.kt dosyasında:
 package com.example.studyfy.modules.post
 
 import android.content.Context
@@ -42,10 +43,20 @@ class PostDetailActivity : AppCompatActivity() {
         binding.commentsRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.commentsRecyclerView.adapter = commentAdapter
 
+        // BURADAKİ DEĞİŞİKLİK: Intent'ten postId'i al ve ViewModel'e gönder
+        val postId = intent.getStringExtra("postId")
+        if (postId == null) {
+            Toast.makeText(this, "Gönderi ID'si alınamadı", Toast.LENGTH_SHORT).show()
+            finish()
+            return
+        }
+        // ViewModel'e postId'i set et, böylece ViewModel gönderiyi yükleyebilir
+        viewModel.loadPostById(postId) // Bu metodu çağırıyoruz
+
         viewModel.selectedPost.observe(this) { post ->
             if (post == null) {
                 Toast.makeText(this, "Gönderi verisi alınamadı", Toast.LENGTH_SHORT).show()
-                finish()
+                finish() // Eğer post null dönerse aktiviteyi kapat
                 return@observe
             }
             currentPost = post
@@ -59,6 +70,7 @@ class PostDetailActivity : AppCompatActivity() {
         }
     }
 
+    // ... (Diğer metotlar aynı kalacak)
     private fun toggleCommentSection() {
         if (isFinishing || isDestroyed) return // Aktivite kapanıyorsa işlem yapma
 

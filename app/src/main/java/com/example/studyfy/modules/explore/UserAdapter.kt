@@ -1,6 +1,7 @@
 package com.example.studyfy.modules.explore
 
 import User
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,7 @@ import com.example.studyfy.databinding.ItemSuggestionUserBinding
 class UserAdapter(
     private val currentUserId: String,
     private val users: MutableList<User>,
-    private val onFollowToggle: (User, Boolean) -> Unit // isFollowed bilgisi ile birlikte
+    private val onFollowToggle: (User, Boolean) -> Unit
 ) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
     inner class UserViewHolder(val binding: ItemSuggestionUserBinding) : RecyclerView.ViewHolder(binding.root)
@@ -40,7 +41,6 @@ class UserAdapter(
 
         val isFollowed = user.followers.contains(currentUserId)
 
-        // Eğer kullanıcı kendisiyse butonu gizle
         if (user.userId == currentUserId) {
             binding.buttonFollow.visibility = View.GONE
         } else {
@@ -50,6 +50,14 @@ class UserAdapter(
             binding.buttonFollow.setOnClickListener {
                 onFollowToggle(user, isFollowed)
             }
+        }
+
+        // Kullanıcının profiline gitmek için layout'a tıklama
+        binding.userLayout.setOnClickListener {
+            val context = binding.root.context
+            val intent = Intent(context, UserProfileActivity::class.java)
+            intent.putExtra("userId", user.userId)
+            context.startActivity(intent)
         }
     }
 }

@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.studyfy.R
 import com.example.studyfy.databinding.ItemPostBinding
-
 import com.example.studyfy.modules.db.FirestoreManager
 import com.example.studyfy.modules.db.Post
 import com.example.studyfy.modules.db.PostRepository
@@ -121,13 +120,15 @@ class FollowingPostsAdapter(private val posts: MutableList<Post>) :
                     commentsRecyclerView.visibility = View.VISIBLE
                     commentInputContainer.visibility = View.VISIBLE
                     commentEditText.requestFocus()
-                    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    val imm =
+                        context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                     imm.showSoftInput(commentEditText, InputMethodManager.SHOW_IMPLICIT)
                     loadComments(post.postId, holder)
                 } else {
                     commentsRecyclerView.visibility = View.GONE
                     commentInputContainer.visibility = View.GONE
-                    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    val imm =
+                        context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                     imm.hideSoftInputFromWindow(commentEditText.windowToken, 0)
                 }
             }
@@ -143,7 +144,8 @@ class FollowingPostsAdapter(private val posts: MutableList<Post>) :
 
                 UserRepository.getCurrentUsername { username ->
                     if (username.isNullOrEmpty()) {
-                        Toast.makeText(context, "Kullanıcı adı alınamadı", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Kullanıcı adı alınamadı", Toast.LENGTH_SHORT)
+                            .show()
                         return@getCurrentUsername
                     }
 
@@ -160,8 +162,12 @@ class FollowingPostsAdapter(private val posts: MutableList<Post>) :
                             holder.binding.commentInputContainer.visibility = View.GONE
 
                             // Klavyeyi kapat
-                            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                            imm.hideSoftInputFromWindow(holder.binding.commentEditText.windowToken, 0)
+                            val imm =
+                                context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                            imm.hideSoftInputFromWindow(
+                                holder.binding.commentEditText.windowToken,
+                                0
+                            )
                         },
                         onFailure = {
                             Toast.makeText(context, "Yorum eklenemedi", Toast.LENGTH_SHORT).show()
@@ -181,7 +187,11 @@ class FollowingPostsAdapter(private val posts: MutableList<Post>) :
                 holder.binding.commentCount.text = comments.size.toString()
             },
             onFailure = {
-                Toast.makeText(holder.binding.root.context, "Yorumlar alınamadı", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    holder.binding.root.context,
+                    "Yorumlar alınamadı",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         )
     }

@@ -20,6 +20,8 @@ class CommentAdapter(private val comments: MutableList<Comment>) :
         val comment = comments[position]
         holder.binding.tvUsername.text = comment.username
         holder.binding.tvComment.text = comment.content
+
+
     }
 
     override fun getItemCount(): Int = comments.size

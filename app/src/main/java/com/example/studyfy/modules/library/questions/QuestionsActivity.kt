@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.studyfy.databinding.ActivityQuestionsBinding
 import com.example.studyfy.modules.db.FirestoreManager
 import com.example.studyfy.modules.post.PostGridActivityAdapter
-import com.example.studyfy.modules.post.PostGridFragmentAdapter
 import com.google.firebase.auth.FirebaseAuth
 
 class QuestionsActivity : AppCompatActivity() {
